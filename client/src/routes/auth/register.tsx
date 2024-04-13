@@ -109,7 +109,7 @@ const Page = () => {
                             name="role"
                             render={({ field }) => (
                                 <FormItem className="space-y-3">
-                                    <FormLabel>Notify me about...</FormLabel>
+                                    <FormLabel>Ти хто?</FormLabel>
                                     <FormControl>
                                         <RadioGroup
                                             onValueChange={field.onChange}
@@ -134,7 +134,6 @@ const Page = () => {
                                 </FormItem>
                             )}
                         />
-                        <Label>Ти хто?</Label>
 
                         <Button type="submit" loading={form.formState.isSubmitting}>
                             Зареєструватись
