@@ -49,7 +49,7 @@ export type LoginSchema = zod.infer<typeof loginSchema>;
 export type BaseUserSchema = zod.infer<typeof baseUserSchema>;
 
 export interface User {
-    id: string;
+    id: number;
     email: string;
     first_name: string;
     last_name: string;
