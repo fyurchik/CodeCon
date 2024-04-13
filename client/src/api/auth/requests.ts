@@ -34,7 +34,7 @@ export const logout = async (token: string | null) => {
     const res = await api
         .post("authorize/logout/", {
             headers: {
-                Authorization: `${token}`,
+                Authorization: `Token ${token}`,
             },
         })
         .json();
@@ -45,7 +45,7 @@ export const getUserData = async (token: string | null) => {
     const res = await api
         .get("authorize/getuserdata/", {
             headers: {
-                Authorization: `${token}`,
+                Authorization: `Token ${token}`,
             },
         })
         .json<{ user: User; token: string }>();

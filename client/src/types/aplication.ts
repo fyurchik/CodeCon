@@ -1,14 +1,14 @@
 import { z as zod } from "zod";
 
 export const aplicationSchema = zod.object({
-    requestArea: zod.string().min(1, { message: "Введіть інформацію про Ваш запит" }),
-    desciptionArea: zod.string().min(1, { message: "Введіть детальну інформацію про Ваш запит" }),
-    age: zod.number().min(1, { message: "Введіть Ваш вік" }).max(3, { message: "Введіть Ваш релаьний вік" }),
+    title: zod.string().min(1, { message: "Введіть інформацію про Ваш запит" }),
+    content: zod.string().min(1, { message: "Введіть детальну інформацію про Ваш запит" }),
+    age: zod.coerce.number().gte(1, { message: "Введіть Ваш вік" }),
     city: zod.string().min(1, { message: "Введіть місто" }),
-    categories: zod.string().array().min(1, { message: "Виберіть категорію" }),
-    urgency: zod.enum(["urgent", "not_urgent"]),
-    contactPhone: zod.string().min(1, { message: "Введіть Ваш номер телефону" }),
-    contactEmail: zod
+    // categories: zod.string().array().min(1, { message: "Виберіть категорію" }),
+    urgent: zod.enum(["urgent", "not_urgent"]),
+    phone: zod.string().min(1, { message: "Введіть Ваш номер телефону" }),
+    email: zod
         .string()
         .email({ message: "Введіть вірну електронну адресу" })
         .min(1, { message: "Введіть вашу електронну адресу" }),
