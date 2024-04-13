@@ -1,35 +1,39 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute } from "@tanstack/react-router";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useCreateApplication } from "@/api/applications/hooks";
+import { UserContext } from "@/context/User";
 import { aplicationSchema, AplicationSchema } from "@/types/aplication";
+import Button from "@/ui/Button";
 import { CardContent, CardTitle, CardDescription } from "@/ui/Card";
 import { FormMessage, Form, FormControl, FormField, FormItem, FormLabel } from "@/ui/Form";
 import Input from "@/ui/Input";
+import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/Select";
 import { Textarea } from "@/ui/Textarea";
 import { Checkbox } from "@/ui/Сheckbox";
-import Button from "@/ui/Button";
-import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 
 const Create = () => {
+    const { token, user } = useContext(UserContext);
     const form = useForm<AplicationSchema>({
         resolver: zodResolver(aplicationSchema),
         defaultValues: {
-            requestArea: "",
-            desciptionArea: "",
+            title: "",
+            content: "",
             age: 0,
             city: "",
-            categories: [],
-            urgency: "not_urgent",
-            contactPhone: "",
-            contactEmail: "",
+            // categories: [],
+            urgent: "not_urgent",
+            phone_number: "",
+            email: "",
         },
     });
 
-    const onSubmit = (values: AplicationSchema) => {
-        console.log(values);
+    const createApplicationHandler = useCreateApplication(token);
 
-        // signUpHandler.mutate({ email: values.email, password: values.password });
+    const onSubmit = async (values: AplicationSchema) => {
+        await createApplicationHandler.mutateAsync({ ...values, urgent: values.urgent === "urgent", user: user.id });
     };
 
     return (
@@ -45,7 +49,7 @@ const Create = () => {
                                 <h4 className="text-xl">Ваш запит</h4>
                                 <FormField
                                     control={form.control}
-                                    name="requestArea"
+                                    name="title"
                                     render={({ field }) => (
                                         <FormItem>
                                             <Input
@@ -62,7 +66,7 @@ const Create = () => {
                                 <h4 className="text-xl">Опис</h4>
                                 <FormField
                                     control={form.control}
-                                    name="desciptionArea"
+                                    name="content"
                                     render={({ field }) => (
                                         <FormItem>
                                             <Textarea
@@ -89,7 +93,7 @@ const Create = () => {
                                                     {...field}
                                                     placeholder="Введіть, будь ласка, ваш вік"
                                                     type="number"
-                                                    max={3}
+                                                    max={120}
                                                 />
                                                 <FormMessage />
                                             </FormItem>
@@ -121,7 +125,7 @@ const Create = () => {
                                     />
                                 </div>
                             </section>
-                            <section className="mt-6">
+                            {/* <section className="mt-6">
                                 <h4 className="text-xl">Категорії</h4>
                                 <FormField
                                     control={form.control}
@@ -138,13 +142,13 @@ const Create = () => {
                                         </FormItem>
                                     )}
                                 />
-                            </section>
+                            </section> */}
                             <section className="mt-6">
                                 <h4 className="text-xl">Терміновість</h4>
                                 <CardDescription>На скільки терміновий ваш запит про допомогу?</CardDescription>
                                 <FormField
                                     control={form.control}
-                                    name="urgency"
+                                    name="urgent"
                                     render={({ field }) => (
                                         <FormItem className="mt-3 flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                                             <FormControl>
@@ -183,7 +187,7 @@ const Create = () => {
 
                                         <FormField
                                             control={form.control}
-                                            name="contactPhone"
+                                            name="phone_number"
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <Input
@@ -201,7 +205,7 @@ const Create = () => {
 
                                         <FormField
                                             control={form.control}
-                                            name="contactEmail"
+                                            name="email"
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <Input
@@ -216,7 +220,7 @@ const Create = () => {
                                     </div>
                                 </div>
                             </section>
-                            <Button type="submit" className="mt-6">
+                            <Button type="submit" className="mt-6" loading={form.formState.isSubmitting}>
                                 Опублікувати заявку
                             </Button>
                         </form>

@@ -13,7 +13,7 @@ export const register = async (data: RegisterSchema) => {
                 first_name: data.firstName,
                 last_name: data.lastName,
                 email: data.email,
-                // role: data.role,
+                role: data.role === "volonteer" ? "IsVolonteer" : "SimpleUser",
                 username: data.email,
                 password: data.password,
                 password2: data.password,
@@ -34,7 +34,7 @@ export const logout = async (token: string | null) => {
     const res = await api
         .post("authorize/logout/", {
             headers: {
-                Authorization: `${token}`,
+                Authorization: `Token ${token}`,
             },
         })
         .json();
@@ -45,7 +45,7 @@ export const getUserData = async (token: string | null) => {
     const res = await api
         .get("authorize/getuserdata/", {
             headers: {
-                Authorization: `${token}`,
+                Authorization: `Token ${token}`,
             },
         })
         .json<{ user: User; token: string }>();

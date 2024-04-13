@@ -53,5 +53,5 @@ export interface User {
     email: string;
     first_name: string;
     last_name: string;
-    role: "in_need" | "volonteer";
+    role: "IsVolonterr" | "SimpleUser";
 }
