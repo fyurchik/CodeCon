@@ -30,6 +30,17 @@ export const login = async (data: LoginSchema) => {
     return res;
 };
 
+export const logout = async (token: string | null) => {
+    const res = await api
+        .post("authorize/logout/", {
+            headers: {
+                Authorization: `${token}`,
+            },
+        })
+        .json();
+    return res;
+};
+
 export const getUserData = async (token: string | null) => {
     const res = await api
         .get("authorize/getuserdata/", {

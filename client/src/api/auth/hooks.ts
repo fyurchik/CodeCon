@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
 import { useContext } from "react";
 import { toast } from "sonner";
-import { getUserData, login, register } from "./requests";
+import { getUserData, login, logout, register } from "./requests";
 import { UserContext } from "@/context/User";
 import { LoginSchema, RegisterSchema } from "@/types/auth";
 
@@ -46,6 +46,33 @@ export const useLogin = () => {
             localStorage.setItem("user", JSON.stringify(data.user));
             localStorage.setItem("token", JSON.stringify(data.token));
             void navigate({ to: "/cabinet" });
+        },
+    });
+};
+
+export const useLogout = () => {
+    const { setUser, setToken } = useContext(UserContext);
+    const navigate = useNavigate();
+    return useMutation({
+        mutationFn: async (token: string | null) => {
+            await logout(token);
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            setUser(null);
+            setToken(null);
+            toast.success("Ви успішно вийшли");
+            await navigate({ to: "/auth/login" });
+        },
+        onSuccess: () => {
+            toast.success("Ви успішно вийшли з акаунту!");
+        },
+        onError: async () => {
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            setUser(null);
+            setToken(null);
+            toast.success("Ви успішно вийшли з акаунту!");
+            await navigate({ to: "/auth/login" });
         },
     });
 };
