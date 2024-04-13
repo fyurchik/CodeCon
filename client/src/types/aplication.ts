@@ -7,7 +7,7 @@ export const aplicationSchema = zod.object({
     city: zod.string().min(1, { message: "Введіть місто" }),
     // categories: zod.string().array().min(1, { message: "Виберіть категорію" }),
     urgent: zod.enum(["urgent", "not_urgent"]),
-    phone: zod.string().min(1, { message: "Введіть Ваш номер телефону" }),
+    phone_number: zod.string().min(1, { message: "Введіть Ваш номер телефону" }),
     email: zod
         .string()
         .email({ message: "Введіть вірну електронну адресу" })

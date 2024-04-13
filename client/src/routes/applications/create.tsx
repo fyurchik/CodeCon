@@ -25,7 +25,7 @@ const Create = () => {
             city: "",
             // categories: [],
             urgent: "not_urgent",
-            phone: "",
+            phone_number: "",
             email: "",
         },
     });
@@ -187,7 +187,7 @@ const Create = () => {
 
                                         <FormField
                                             control={form.control}
-                                            name="phone"
+                                            name="phone_number"
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <Input
