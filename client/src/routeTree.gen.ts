@@ -11,12 +11,54 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as GatheringImport } from './routes/gathering'
+import { Route as CabinetImport } from './routes/cabinet'
 import { Route as IndexImport } from './routes/index'
+import { Route as ApplicationsIndexImport } from './routes/applications/index'
+import { Route as AuthSignupImport } from './routes/auth/sign_up'
+import { Route as AuthSigninImport } from './routes/auth/sign_in'
+import { Route as ApplicationsSearchImport } from './routes/applications/search'
+import { Route as ApplicationsCreateImport } from './routes/applications/create'
 
 // Create/Update Routes
 
+const GatheringRoute = GatheringImport.update({
+  path: '/gathering',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CabinetRoute = CabinetImport.update({
+  path: '/cabinet',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ApplicationsIndexRoute = ApplicationsIndexImport.update({
+  path: '/applications/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSignupRoute = AuthSignupImport.update({
+  path: '/auth/sign_up',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthSigninRoute = AuthSigninImport.update({
+  path: '/auth/sign_in',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ApplicationsSearchRoute = ApplicationsSearchImport.update({
+  path: '/applications/search',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ApplicationsCreateRoute = ApplicationsCreateImport.update({
+  path: '/applications/create',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -28,11 +70,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/cabinet': {
+      preLoaderRoute: typeof CabinetImport
+      parentRoute: typeof rootRoute
+    }
+    '/gathering': {
+      preLoaderRoute: typeof GatheringImport
+      parentRoute: typeof rootRoute
+    }
+    '/applications/create': {
+      preLoaderRoute: typeof ApplicationsCreateImport
+      parentRoute: typeof rootRoute
+    }
+    '/applications/search': {
+      preLoaderRoute: typeof ApplicationsSearchImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/sign_in': {
+      preLoaderRoute: typeof AuthSigninImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/sign_up': {
+      preLoaderRoute: typeof AuthSignupImport
+      parentRoute: typeof rootRoute
+    }
+    '/applications/': {
+      preLoaderRoute: typeof ApplicationsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexRoute])
+export const routeTree = rootRoute.addChildren([
+  IndexRoute,
+  CabinetRoute,
+  GatheringRoute,
+  ApplicationsCreateRoute,
+  ApplicationsSearchRoute,
+  AuthSigninRoute,
+  AuthSignupRoute,
+  ApplicationsIndexRoute,
+])
 
 /* prettier-ignore-end */

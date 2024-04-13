@@ -1,5 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { healthcheck } from "@/api/auth/requests";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/')({
-  component: () => <div>Hello /!</div>
-})
+const Page = () => {
+    healthcheck();
+    return <div>hello</div>;
+};
+
+export const Route = createFileRoute("/")({
+    component: Page,
+});
