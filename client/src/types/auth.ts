@@ -2,20 +2,23 @@ import { z as zod } from "zod";
 
 export const registerSchema = zod
     .object({
-        firstName: zod.string().trim().min(1, { message: "Enter your first name" }),
-        lastName: zod.string().trim().min(1, { message: "Enter your last name" }),
-        email: zod.string().min(1, { message: "Enter your email" }),
+        firstName: zod.string().trim().min(1, { message: "Введіть ваше ім'я" }),
+        lastName: zod.string().trim().min(1, { message: "Введіть ваше прізвище" }),
+        email: zod
+            .string()
+            .email({ message: "Введіть вірну електронну адресу" })
+            .min(1, { message: "Введіть вашу електронну адресу" }),
         role: zod.enum(["in_need", "volonteer"]),
         password: zod
             .string()
             .trim()
-            .min(1, { message: "Enter your password" })
-            .min(8, { message: "Password must be at least 8 characters long" })
-            .max(255, { message: "Password must be at most 255 characters long" }),
-        confirmPassword: zod.string().trim().min(1, { message: "Confirm your password" }),
+            .min(1, { message: "Введіть ваш пароль" })
+            .min(8, { message: "Пароль має бути мінімум 8 символів" })
+            .max(255, { message: "Пароль не можу бути довшим за 255 символів" }),
+        confirmPassword: zod.string().trim().min(1, { message: "Подтвердіть ваш пароль" }),
     })
     .refine((schemaData) => schemaData.password === schemaData.confirmPassword, {
-        message: "Passwords must match",
+        message: "Паролі мають збігатись",
         path: ["confirmPassword"],
     });
 
