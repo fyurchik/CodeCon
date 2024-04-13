@@ -4,6 +4,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role= models.TextField(max_length=500)
+
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     
@@ -15,4 +19,9 @@ class Application(models.Model):
     urgent = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     age = models.IntegerField()    
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
+    phone_number = models.CharField(max_length=15)
+    city = models.CharField(max_length=30, blank=True)
+    email = models.EmailField(max_length=30, blank=True)
+
+    

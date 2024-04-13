@@ -1,14 +1,16 @@
 from rest_framework import status
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from django.contrib.auth.models import User, Group
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserShowInfo
-from .permissions import IsVolonteer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserShowInfo, PostSerializer
+from .permissions import IsVolonteer, IsSimpleUser
+from .models import Application
 
 
 @api_view(['GET'])
@@ -48,7 +50,7 @@ class UserRegisterAPIView(APIView):
         serializer = UserRegisterSerializer(data=request.data)        
         if serializer.is_valid():            
             serializer.save()
-            print(serializer.data)
+            #print(serializer.data)
             response = {
                 'success': True,
                 'user': serializer.data,
@@ -68,19 +70,24 @@ class UserLogoutAPIView(APIView):
         return Response({"success": True, "detail": "Logged out!"}, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getdata(request):
-    if request.method == 'GET':         
-        auth_header = request.headers.get('Authorization')
-        token_key = auth_header
-        token = Token.objects.get(key=token_key)
-        user = token.user
+    if request.method == 'GET':       
+        user = request.user
         serializer = UserShowInfo(user)   
         return Response({"user":serializer.data}, status=status.HTTP_200_OK)
     return Response({"message":"invalid Token"}, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
-@permission_classes([IsVolonteer])
-def ShowOnlyForVolonteer(request):
-    # my_group = Group.objects.get(name='my_group_name') 
-    # my_group.user_set.add(your_user)
-    return Response()
+
+class PostViewSet(viewsets.ModelViewSet):    
+    queryset = Application.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_permissions(self):    
+        if self.action == 'create':
+            permission_classes = [IsSimpleUser]    
+        else:
+            permission_classes = self.permission_classes    
+        return [permission() for permission in permission_classes]
+    

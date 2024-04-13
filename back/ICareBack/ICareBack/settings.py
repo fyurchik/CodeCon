@@ -117,13 +117,16 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',        
     ],  
     'DEFAULT_PERMISSION_CLASSES': (
-    'rest_framework.permissions.AllowAny',    
+        'rest_framework.permissions.AllowAny',  
+        
+
     ),  
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',    
     ]
 }
+
+PASSWORD_RESET_TIMEOUT = 259200
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
