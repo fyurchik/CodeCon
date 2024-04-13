@@ -6,7 +6,6 @@ import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
-import Label from "@/ui/Label";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 
 const Page = () => {
