@@ -24,7 +24,7 @@ const Page = () => {
 
     // const signUpHandler = useSignUp();
 
-    const onSubmit = (values: Schema) => {
+    const onSubmit = (values: RegisterSchema) => {
         // signUpHandler.mutate({ email: values.email, password: values.password });
     };
 
