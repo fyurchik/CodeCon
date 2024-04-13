@@ -97,7 +97,19 @@ const Page = () => {
                         </Button>
                     </div>
                     {/* <p className="text-center">Тут поки порожньо...</p> */}
-                    <ApplicationCard />
+                    <ApplicationCard
+                        application={{
+                            active: true,
+                            age: 19,
+                            city: "Lviv",
+                            description: "What da fak is dis",
+                            id: 24,
+                            tags: ["fuck", "me"],
+                            title: "Dafak",
+                            urgency: "urgent",
+                            userId: 24,
+                        }}
+                    />
                 </section>
             )}
         </section>
