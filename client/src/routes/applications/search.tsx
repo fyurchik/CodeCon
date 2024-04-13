@@ -1,12 +1,26 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useContext, useEffect } from "react";
 import { z as zod } from "zod";
+import { useApplications } from "@/api/applications/hooks";
+import { UserContext } from "@/context/User";
+import { useIntersection } from "@/hooks/useIntersection";
 import ApplicationCard from "@/ui/ApplicationCard";
 import Input from "@/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/Select";
 
 const Page = () => {
+    const { token } = useContext(UserContext);
     const navigate = Route.useNavigate();
     const search = Route.useSearch();
+    const applications = useApplications(token);
+    console.log(applications.data);
+    const { isIntersecting, ref } = useIntersection({
+        threshold: 0,
+    });
+
+    useEffect(() => {
+        if (isIntersecting && applications.hasNextPage) void applications.fetchNextPage();
+    }, [isIntersecting, applications]);
     return (
         <section>
             <aside className="fixed left-0 top-0 z-[999] flex h-screen w-72 flex-col gap-4 bg-card pl-8 pt-24">
@@ -58,45 +72,17 @@ const Page = () => {
                     />
                 </div>
                 <div className="mt-6 flex flex-col gap-4">
-                    <ApplicationCard
-                        application={{
-                            active: true,
-                            age: 19,
-                            city: "Lviv",
-                            description: "What da fak is dis",
-                            id: 24,
-                            tags: ["fuck", "me"],
-                            title: "Dafak",
-                            urgency: "urgent",
-                            userId: 24,
-                        }}
-                    />
-                    <ApplicationCard
-                        application={{
-                            active: true,
-                            age: 19,
-                            city: "Uzhorod",
-                            description: "What da fak is dis",
-                            id: 25,
-                            tags: [],
-                            title: "Dafak",
-                            urgency: "not_urgent",
-                            userId: 20,
-                        }}
-                    />
-                    <ApplicationCard
-                        application={{
-                            active: false,
-                            age: 19,
-                            city: "Kyiv",
-                            description: "What da fak is dis",
-                            id: 26,
-                            tags: [],
-                            title: "Dafak",
-                            urgency: "not_urgent",
-                            userId: 21,
-                        }}
-                    />
+                    {applications.data?.pages.map((page) =>
+                        page.results.map((application, i) =>
+                            i === 4 ? (
+                                <div ref={ref} key={application.id}>
+                                    <ApplicationCard application={application} />
+                                </div>
+                            ) : (
+                                <ApplicationCard key={application.id} application={application} />
+                            )
+                        )
+                    )}
                 </div>
             </section>
         </section>

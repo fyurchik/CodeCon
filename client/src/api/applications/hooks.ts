@@ -1,13 +1,14 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
 import { useContext } from "react";
 import { toast } from "sonner";
-import { createApplication } from "./requests";
+import { createApplication, getApplications } from "./requests";
 import { UserContext } from "@/context/User";
 import { AplicationSchema } from "@/types/aplication";
 
 export const useCreateApplication = (token: string | null) => {
+    const QueryClient = useQueryClient();
     return useMutation({
         mutationFn: (input: AplicationSchema) => createApplication(token, input),
         onError: async (err) => {
@@ -19,7 +20,26 @@ export const useCreateApplication = (token: string | null) => {
             toast.error("Не вдалося створити запит!");
         },
         onSuccess: async () => {
+            void QueryClient.invalidateQueries({ queryKey: ["applications"] });
             toast.success("Запит успішно створено!");
+        },
+    });
+};
+
+export const useApplications = (token: string | null) => {
+    // return useQuery({
+    //     queryKey: ["applications", token],
+    //     queryFn: () => getApplications(token),
+    // });
+    return useInfiniteQuery({
+        queryKey: ["notes", token],
+        queryFn: () => getApplications(token),
+        initialPageParam: 1,
+        getNextPageParam: (lastPage, allPages) => {
+            if (lastPage.next) {
+                return allPages.length + 1;
+            }
+            return null;
         },
     });
 };

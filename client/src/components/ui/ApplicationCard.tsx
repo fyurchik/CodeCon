@@ -17,28 +17,30 @@ import {
 
 interface Props {
     application: {
-        urgency: "urgent" | "not_urgent";
-        city: string;
-        age: number;
-        tags: string[];
         active: boolean;
+        age: number;
+        city: string;
+        content: string;
+        email: string;
         id: number;
-        userId: number;
+        phone_number: string;
+        tags: number[];
         title: string;
-        description: string;
+        urgent: boolean;
+        user: number;
     };
 }
 
-const ApplicationCard = ({ application: { tags, title, active, age, city, description, urgency, userId } }: Props) => {
+const ApplicationCard = ({ application: { tags, title, active, age, city, content, urgent, user: userId } }: Props) => {
     const { user } = useContext(UserContext);
     return (
         <Card>
             <CardHeader>
-                {urgency === "urgent" && <Badge variant="destructive">Терміново</Badge>}
+                {urgent && <Badge variant="destructive">Терміново</Badge>}
                 <CardTitle className="line-clamp-2">{title}</CardTitle>
             </CardHeader>
             <CardContent>
-                <p className="line-clamp-2">{description}</p>
+                <p className="line-clamp-2">{content}</p>
                 <div className="my-8 grid grid-cols-4 gap-4">
                     <div className="flex flex-col gap-2">
                         <p>Вік: {age}</p>
