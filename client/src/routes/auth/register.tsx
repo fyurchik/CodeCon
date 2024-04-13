@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import { useRegister } from "@/api/auth/hooks";
 import { registerSchema, RegisterSchema } from "@/types/auth";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
@@ -9,6 +10,7 @@ import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 
 const Page = () => {
+    const navigate = Route.useNavigate();
     const form = useForm<RegisterSchema>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
@@ -21,11 +23,12 @@ const Page = () => {
         },
     });
 
-    // const signUpHandler = useSignUp();
+    const registerHandler = useRegister();
 
-    const onSubmit = (values: RegisterSchema) => {
-        console.log(values);
-        // signUpHandler.mutate({ email: values.email, password: values.password });
+    const onSubmit = async (values: RegisterSchema) => {
+        await registerHandler.mutateAsync(values);
+        form.reset();
+        void navigate({ to: "/auth/login" });
     };
 
     return (
