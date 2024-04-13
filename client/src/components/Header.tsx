@@ -20,13 +20,19 @@ const Header = () => {
             <nav>
                 <ul className="flex flex-row items-center gap-16">
                     <li>
-                        <Link to="/">Про сервіс</Link>
+                        <Link className="transition duration-300 hover:text-[#6B6B6B] " to="/">
+                            Про сервіс
+                        </Link>
                     </li>
                     <li>
-                        <Link to="/">Як працює</Link>
+                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/">
+                            Як працює
+                        </Link>
                     </li>
                     <li>
-                        <Link to="/">Контакти</Link>
+                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/">
+                            Контакти
+                        </Link>
                     </li>
                     {isAuthorized && (
                         <Button onClick={onSubmit} size="sm" loading={logoutHandler.isPending}>
