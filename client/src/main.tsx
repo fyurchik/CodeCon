@@ -3,6 +3,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import ThemeContextProvider from "./context/Theme";
+import UserContextProvider from "./context/User";
 import "./index.css";
 
 import { routeTree } from "./routeTree.gen";
@@ -21,7 +22,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <ThemeContextProvider>
-                <RouterProvider router={router} />
+                <UserContextProvider>
+                    <RouterProvider router={router} />
+                </UserContextProvider>
             </ThemeContextProvider>
         </QueryClientProvider>
     </React.StrictMode>

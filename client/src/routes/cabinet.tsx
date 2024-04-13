@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { UserContext } from "@/context/User";
 import { BaseUserSchema, baseUserSchema } from "@/types/auth";
 import ApplicationCard from "@/ui/ApplicationCard";
 import Button from "@/ui/Button";
@@ -9,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Input from "@/ui/Input";
 
 const Page = () => {
+    const { user } = useContext(UserContext);
     const form = useForm<BaseUserSchema>({
         resolver: zodResolver(baseUserSchema),
         defaultValues: {
@@ -83,16 +86,18 @@ const Page = () => {
                     </CardContent>
                 </Card>
             </section>
-            <section className="flex flex-col gap-6">
-                <div className="flex items-center justify-between">
-                    <h2 className="mt-6 text-2xl font-medium">Актуальні заявки:</h2>
-                    <Button asChild>
-                        <Link to="/applications/create">Створити заявку</Link>
-                    </Button>
-                </div>
-                {/* <p className="text-center">Тут поки порожньо...</p> */}
-                <ApplicationCard />
-            </section>
+            {user?.role === "in_need" && (
+                <section className="flex flex-col gap-6">
+                    <div className="flex items-center justify-between">
+                        <h2 className="mt-6 text-2xl font-medium">Актуальні заявки:</h2>
+                        <Button asChild>
+                            <Link to="/applications/create">Створити заявку</Link>
+                        </Button>
+                    </div>
+                    {/* <p className="text-center">Тут поки порожньо...</p> */}
+                    <ApplicationCard />
+                </section>
+            )}
         </section>
     );
 };

@@ -47,3 +47,11 @@ export const baseUserSchema = zod.object({
 export type RegisterSchema = zod.infer<typeof registerSchema>;
 export type LoginSchema = zod.infer<typeof loginSchema>;
 export type BaseUserSchema = zod.infer<typeof baseUserSchema>;
+
+export interface User {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    role: "in_need" | "volonteer";
+}
