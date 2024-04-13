@@ -20,6 +20,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
+    
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
@@ -30,24 +31,16 @@ class UserRegisterSerializer(serializers.ModelSerializer):
                   "last_name", "email", "password", "password2"]
         extra_kwargs = {
             'password': {"write_only": True}
-        }
+        }    
 
-    # def validate_username(self, username):
-    #     if User.objects.filter(username=username).exists():
-    #         detail = {
-    #             "detail": "User Already exist!"
-    #         }
-    #         raise ValidationError(detail=detail)
-    #     return username
+    def validate(self, instance):
+        if instance['password'] != instance['password2']:
+            raise ValidationError({"message": "Both password must match"})
 
-    # def validate(self, instance):
-    #     if instance['password'] != instance['password2']:
-    #         raise ValidationError({"message": "Both password must match"})
+        if User.objects.filter(email=instance['email']).exists():
+            raise ValidationError({"message": "Email already taken!"})
 
-    #     if User.objects.filter(email=instance['email']).exists():
-    #         raise ValidationError({"message": "Email already taken!"})
-
-    #     return instance
+        return instance
 
     def create(self, validated_data):
         passowrd = validated_data.pop('password')
