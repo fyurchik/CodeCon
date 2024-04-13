@@ -16,7 +16,7 @@ const Page = () => {
             firstName: "",
             lastName: "",
             email: "",
-            role: "in_need",
+            role: "volonteer",
             password: "",
             confirmPassword: "",
         },
@@ -24,7 +24,8 @@ const Page = () => {
 
     // const signUpHandler = useSignUp();
 
-    const onSubmit = (values: Schema) => {
+    const onSubmit = (values: RegisterSchema) => {
+        console.log(values);
         // signUpHandler.mutate({ email: values.email, password: values.password });
     };
 
@@ -103,17 +104,37 @@ const Page = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="role"
+                            render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                    <FormLabel>Notify me about...</FormLabel>
+                                    <FormControl>
+                                        <RadioGroup
+                                            onValueChange={field.onChange}
+                                            defaultValue={field.value}
+                                            className="flex flex-col space-y-1"
+                                        >
+                                            <FormItem className="flex items-center space-x-3 space-y-0">
+                                                <FormControl>
+                                                    <RadioGroupItem value="volonteer" />
+                                                </FormControl>
+                                                <FormLabel className="font-normal">Я можу допомогти</FormLabel>
+                                            </FormItem>
+                                            <FormItem className="flex items-center space-x-3 space-y-0">
+                                                <FormControl>
+                                                    <RadioGroupItem value="in_need" />
+                                                </FormControl>
+                                                <FormLabel className="font-normal">Я потребую допомоги</FormLabel>
+                                            </FormItem>
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         <Label>Ти хто?</Label>
-                        <RadioGroup defaultValue="option-one">
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="option-one" id="option-one" />
-                                <Label htmlFor="option-one">Я можу допомогти</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="option-two" id="option-two" />
-                                <Label htmlFor="option-two">Я потребую допомоги</Label>
-                            </div>
-                        </RadioGroup>
 
                         <Button type="submit" loading={form.formState.isSubmitting}>
                             Зареєструватись
