@@ -9,7 +9,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Input from "@/ui/Input";
 
 const Page = () => {
-    const navigate = Route.useNavigate();
     const formLogin = useForm<LoginSchema>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -22,7 +21,6 @@ const Page = () => {
 
     const onSubmit = async (values: LoginSchema) => {
         await loginHandler.mutateAsync(values);
-        void navigate({ to: "/cabinet" });
     };
 
     return (

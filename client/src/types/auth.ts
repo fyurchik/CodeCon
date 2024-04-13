@@ -51,7 +51,7 @@ export type BaseUserSchema = zod.infer<typeof baseUserSchema>;
 export interface User {
     id: string;
     email: string;
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     role: "in_need" | "volonteer";
 }

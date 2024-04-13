@@ -15,9 +15,9 @@ const Page = () => {
     const form = useForm<BaseUserSchema>({
         resolver: zodResolver(baseUserSchema),
         defaultValues: {
-            firstName: "Петро",
-            lastName: "Петренко",
-            email: "example@mail.com",
+            firstName: user?.first_name,
+            lastName: user?.last_name,
+            email: user?.email,
         },
     });
 
@@ -29,8 +29,10 @@ const Page = () => {
     return (
         <section>
             <div className="mt-4 flex items-center gap-8">
-                <h1 className="text-4xl">Вітаю, username</h1>
-                <Button>Потребую допомоги</Button>
+                <h1 className="text-4xl">
+                    Вітаю, {user?.first_name} {user?.last_name}
+                </h1>
+                {user?.role === "in_need" ? <Button>Потребую допомоги</Button> : <Button>Допомагаю</Button>}
             </div>
             <section className="mt-6">
                 <Card className="w-full max-w-md">
