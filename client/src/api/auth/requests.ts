@@ -13,7 +13,7 @@ export const register = async (data: RegisterSchema) => {
                 first_name: data.firstName,
                 last_name: data.lastName,
                 email: data.email,
-                // role: data.role,
+                role: data.role === "volonteer" ? "IsVolonteer" : "",
                 username: data.email,
                 password: data.password,
                 password2: data.password,

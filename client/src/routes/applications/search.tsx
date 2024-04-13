@@ -17,9 +17,45 @@ const Page = () => {
                 />
             </div>
             <div className="mt-6 flex flex-col gap-4">
-                <ApplicationCard />
-                <ApplicationCard />
-                <ApplicationCard />
+                <ApplicationCard
+                    application={{
+                        active: true,
+                        age: 19,
+                        city: "Lviv",
+                        description: "What da fak is dis",
+                        id: 24,
+                        tags: ["fuck", "me"],
+                        title: "Dafak",
+                        urgency: "urgent",
+                        userId: 24,
+                    }}
+                />
+                <ApplicationCard
+                    application={{
+                        active: true,
+                        age: 19,
+                        city: "Uzhorod",
+                        description: "What da fak is dis",
+                        id: 25,
+                        tags: [],
+                        title: "Dafak",
+                        urgency: "not_urgent",
+                        userId: 20,
+                    }}
+                />
+                <ApplicationCard
+                    application={{
+                        active: false,
+                        age: 19,
+                        city: "Kyiv",
+                        description: "What da fak is dis",
+                        id: 26,
+                        tags: [],
+                        title: "Dafak",
+                        urgency: "not_urgent",
+                        userId: 21,
+                    }}
+                />
             </div>
         </section>
     );
