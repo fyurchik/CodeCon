@@ -6,6 +6,7 @@ export const aplicationSchema = zod.object({
     age: zod.number().min(1, { message: "Введіть Ваш вік" }).max(3, { message: "Введіть Ваш релаьний вік" }),
     city: zod.string().min(1, { message: "Введіть місто" }),
     categories: zod.string().array().min(1, { message: "Виберіть категорію" }),
+    urgency: zod.enum(["urgent", "not_urgent"]),
     contactPhone: zod.string().min(1, { message: "Введіть Ваш номер телефону" }),
     contactEmail: zod
         .string()

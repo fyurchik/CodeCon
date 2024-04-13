@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/ui/Textarea";
 import { Checkbox } from "@/ui/Сheckbox";
 import Button from "@/ui/Button";
+import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 
 const Create = () => {
     const form = useForm<AplicationSchema>({
@@ -19,6 +20,7 @@ const Create = () => {
             age: 0,
             city: "",
             categories: [],
+            urgency: "not_urgent",
             contactPhone: "",
             contactEmail: "",
         },
@@ -137,7 +139,40 @@ const Create = () => {
                                     )}
                                 />
                             </section>
-                            <section className="flex-column mt-6 gap-6">
+                            <section className="mt-6">
+                                <h4 className="text-xl">Терміновість</h4>
+                                <CardDescription>На скільки терміновий ваш запит про допомогу?</CardDescription>
+                                <FormField
+                                    control={form.control}
+                                    name="urgency"
+                                    render={({ field }) => (
+                                        <FormItem className="mt-3 flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                                            <FormControl>
+                                                <RadioGroup
+                                                    onValueChange={field.onChange}
+                                                    defaultValue={field.value}
+                                                    className="flex flex-col space-y-1"
+                                                >
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="urgent" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">Терміновий</FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="not_urgent" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">Не дуже терміново</FormLabel>
+                                                    </FormItem>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </section>
+                            <section className="mt-6 flex-col gap-6">
                                 <h4 className="text-xl">Контакти</h4>
                                 <CardDescription>
                                     Введіть будь ласка контакти, за якими до вас можна буде звернутись
