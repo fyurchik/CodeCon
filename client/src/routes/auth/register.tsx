@@ -10,7 +10,6 @@ import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 
 const Page = () => {
-    const navigate = Route.useNavigate();
     const form = useForm<RegisterSchema>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
@@ -28,7 +27,6 @@ const Page = () => {
     const onSubmit = async (values: RegisterSchema) => {
         await registerHandler.mutateAsync(values);
         form.reset();
-        void navigate({ to: "/auth/login" });
     };
 
     return (

@@ -49,9 +49,9 @@ export type LoginSchema = zod.infer<typeof loginSchema>;
 export type BaseUserSchema = zod.infer<typeof baseUserSchema>;
 
 export interface User {
-    id: string;
+    id: number;
     email: string;
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     role: "in_need" | "volonteer";
 }
