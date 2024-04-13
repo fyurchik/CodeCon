@@ -1,6 +1,16 @@
+import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import Badge from "./Badge";
 import Button from "./Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
+import {
+    AlertDialog,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/ui/Modal";
 
 const ApplicationCard = () => {
     return (
@@ -37,7 +47,23 @@ const ApplicationCard = () => {
                 </div>
                 <div className="mt-6 flex items-center gap-4">
                     <Button>Редагувати заявку</Button>
-                    <Button variant="destructive">Видалити заявку</Button>
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button variant="destructive">Видалити заявку</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Ви дійсно хочете видалити заявку?</AlertDialogTitle>
+                                <AlertDialogDescription>Ця дія незворотня</AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel>Скасувати</AlertDialogCancel>
+                                <Button type="button" variant="destructive">
+                                    Видалити
+                                </Button>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
             </CardContent>
         </Card>
