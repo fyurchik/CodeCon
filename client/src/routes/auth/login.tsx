@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import { useLogin } from "@/api/auth/hooks";
 import { loginSchema, LoginSchema } from "@/types/auth";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
@@ -8,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Input from "@/ui/Input";
 
 const Page = () => {
+    const navigate = Route.useNavigate();
     const formLogin = useForm<LoginSchema>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -16,12 +18,11 @@ const Page = () => {
         },
     });
 
-    // const signUpHandler = useSignUp();
+    const loginHandler = useLogin();
 
-    const onSubmit = (values: LoginSchema) => {
-        console.log(values);
-
-        // signUpHandler.mutate({ email: values.email, password: values.password });
+    const onSubmit = async (values: LoginSchema) => {
+        await loginHandler.mutateAsync(values);
+        void navigate({ to: "/cabinet" });
     };
 
     return (

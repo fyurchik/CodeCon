@@ -1,5 +1,5 @@
 import { api } from "../api";
-import { RegisterSchema } from "@/types/auth";
+import { LoginSchema, RegisterSchema } from "@/types/auth";
 
 export const healthcheck = async () => {
     const res = await api.get("authorize/").json();
@@ -20,5 +20,10 @@ export const register = async (data: RegisterSchema) => {
             },
         })
         .json();
+    return res;
+};
+
+export const login = async (data: LoginSchema) => {
+    const res = await api.post("authorize/login/", { json: { username: data.email, password: data.password } }).json();
     return res;
 };
