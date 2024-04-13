@@ -1,62 +1,104 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { z as zod } from "zod";
 import ApplicationCard from "@/ui/ApplicationCard";
 import Input from "@/ui/Input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/Select";
 
 const Page = () => {
     const navigate = Route.useNavigate();
     const search = Route.useSearch();
     return (
         <section>
-            <div className="mt-4 flex flex-col gap-8">
-                <h1 className="text-4xl">Актуальні заявки про допомогу:</h1>
-                <Input
-                    placeholder="Пошук"
-                    onChange={(e) => navigate({ search: (prev) => ({ ...prev, search: e.target.value }) })}
-                    value={search.search}
-                />
-            </div>
-            <div className="mt-6 flex flex-col gap-4">
-                <ApplicationCard
-                    application={{
-                        active: true,
-                        age: 19,
-                        city: "Lviv",
-                        description: "What da fak is dis",
-                        id: 24,
-                        tags: ["fuck", "me"],
-                        title: "Dafak",
-                        urgency: "urgent",
-                        userId: 24,
-                    }}
-                />
-                <ApplicationCard
-                    application={{
-                        active: true,
-                        age: 19,
-                        city: "Uzhorod",
-                        description: "What da fak is dis",
-                        id: 25,
-                        tags: [],
-                        title: "Dafak",
-                        urgency: "not_urgent",
-                        userId: 20,
-                    }}
-                />
-                <ApplicationCard
-                    application={{
-                        active: false,
-                        age: 19,
-                        city: "Kyiv",
-                        description: "What da fak is dis",
-                        id: 26,
-                        tags: [],
-                        title: "Dafak",
-                        urgency: "not_urgent",
-                        userId: 21,
-                    }}
-                />
-            </div>
+            <aside className="fixed left-0 top-0 z-[999] flex h-screen w-72 flex-col gap-4 bg-card pl-8 pt-24">
+                <div className="flex flex-col gap-2">
+                    <h3 className="font-medium">Фільтри пошуку</h3>
+                    <div className="flex flex-col gap-1">
+                        <Link to="/applications/search" search={(prev) => ({ ...prev, urgency: "all" })}>
+                            Всі
+                        </Link>
+                        <Link to="/applications/search" search={(prev) => ({ ...prev, urgency: "urgent" })}>
+                            Термінові
+                        </Link>
+                        <Link to="/applications/search" search={(prev) => ({ ...prev, urgency: "not_urgent" })}>
+                            Не термінові
+                        </Link>
+                    </div>
+                </div>
+                <div className="flex flex-col gap-4">
+                    <h3 className="font-medium">Місто</h3>
+                    <Select
+                        onValueChange={(e) =>
+                            navigate({
+                                to: "/applications/search",
+                                search: (prev) => ({ ...prev, city: e }),
+                            })
+                        }
+                    >
+                        <SelectTrigger className="mt-3 placeholder:opacity-40">
+                            <SelectValue placeholder="Оберіть Вашу облась" />
+                        </SelectTrigger>
+                        <SelectContent className="z-[2000]">
+                            <SelectItem value="kyiv">Київська обл.</SelectItem>
+                            <SelectItem value="lviv">Львівська обл.</SelectItem>
+                            <SelectItem value="uzhorod">Ужгородська обл.</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div className="flex flex-col gap-4">
+                    <h3 className="font-medium">Категорії</h3>
+                </div>
+            </aside>
+            <section className="ml-56">
+                <div className="mt-4 flex flex-col gap-8">
+                    <h1 className="text-4xl">Актуальні заявки про допомогу:</h1>
+                    <Input
+                        placeholder="Пошук"
+                        onChange={(e) => navigate({ search: (prev) => ({ ...prev, search: e.target.value }) })}
+                        value={search.search}
+                    />
+                </div>
+                <div className="mt-6 flex flex-col gap-4">
+                    <ApplicationCard
+                        application={{
+                            active: true,
+                            age: 19,
+                            city: "Lviv",
+                            description: "What da fak is dis",
+                            id: 24,
+                            tags: ["fuck", "me"],
+                            title: "Dafak",
+                            urgency: "urgent",
+                            userId: 24,
+                        }}
+                    />
+                    <ApplicationCard
+                        application={{
+                            active: true,
+                            age: 19,
+                            city: "Uzhorod",
+                            description: "What da fak is dis",
+                            id: 25,
+                            tags: [],
+                            title: "Dafak",
+                            urgency: "not_urgent",
+                            userId: 20,
+                        }}
+                    />
+                    <ApplicationCard
+                        application={{
+                            active: false,
+                            age: 19,
+                            city: "Kyiv",
+                            description: "What da fak is dis",
+                            id: 26,
+                            tags: [],
+                            title: "Dafak",
+                            urgency: "not_urgent",
+                            userId: 21,
+                        }}
+                    />
+                </div>
+            </section>
         </section>
     );
 };
