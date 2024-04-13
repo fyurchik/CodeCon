@@ -77,7 +77,7 @@
         "prefer-regex-literals": "error",
         "no-octal-escape": "error",
         "no-param-reassign": "error",
-        "no-console": "error",
+        "no-console": "off",
         "no-alert": "error",
         "symbol-description": "error",
         "array-callback-return": ["error", { "allowImplicit": true }],

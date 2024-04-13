@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { BaseUserSchema, baseUserSchema } from "@/types/auth";
+import ApplicationCard from "@/ui/ApplicationCard";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
@@ -82,13 +83,15 @@ const Page = () => {
                     </CardContent>
                 </Card>
             </section>
-            <section>
+            <section className="flex flex-col gap-6">
                 <div className="flex items-center justify-between">
                     <h2 className="mt-6 text-2xl font-medium">Актуальні заявки:</h2>
                     <Button asChild>
                         <Link to="/applications/create">Створити заявку</Link>
                     </Button>
                 </div>
+                {/* <p className="text-center">Тут поки порожньо...</p> */}
+                <ApplicationCard />
             </section>
         </section>
     );
