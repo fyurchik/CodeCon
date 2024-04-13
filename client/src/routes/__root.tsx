@@ -11,7 +11,7 @@ const Page = () => {
             <Header />
             <main
                 className={`
-                    ${theme === "dark" ? "dark" : ""} relative h-screen w-full grow overflow-auto bg-background p-4 text-foreground
+                    ${theme === "dark" ? "dark" : ""} relative mt-[68px] h-screen w-full grow overflow-auto bg-background p-4 text-foreground
                     sm:p-6
                     md:px-8 md:py-7
                     lg:px-12
