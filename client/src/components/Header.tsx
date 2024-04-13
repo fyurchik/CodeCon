@@ -25,12 +25,6 @@ const Header = () => {
                     <li>
                         <Link to="/applications/search">Пошук заявок</Link>
                     </li>
-                    <li>
-                        <Link to="/gathering">Збори</Link>
-                    </li>
-                    <li>
-                        <Link to="/">Контакти</Link>
-                    </li>
                     {isAuthorized && (
                         <Button onClick={onSubmit} size="sm" loading={logoutHandler.isPending}>
                             Вийти
