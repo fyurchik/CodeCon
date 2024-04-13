@@ -35,5 +35,15 @@ export const loginSchema = zod.object({
         .max(255, { message: "Пароль не можу бути довшим за 255 символів" }),
 });
 
+export const baseUserSchema = zod.object({
+    firstName: zod.string().trim().min(1, { message: "Введіть ваше ім'я" }),
+    lastName: zod.string().trim().min(1, { message: "Введіть ваше прізвище" }),
+    email: zod
+        .string()
+        .email({ message: "Введіть вірну електронну адресу" })
+        .min(1, { message: "Введіть вашу електронну адресу" }),
+});
+
 export type RegisterSchema = zod.infer<typeof registerSchema>;
 export type LoginSchema = zod.infer<typeof loginSchema>;
+export type BaseUserSchema = zod.infer<typeof baseUserSchema>;
