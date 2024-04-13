@@ -15,8 +15,8 @@ import { Route as GatheringImport } from './routes/gathering'
 import { Route as CabinetImport } from './routes/cabinet'
 import { Route as IndexImport } from './routes/index'
 import { Route as ApplicationsIndexImport } from './routes/applications/index'
-import { Route as AuthSignupImport } from './routes/auth/sign_up'
-import { Route as AuthSigninImport } from './routes/auth/sign_in'
+import { Route as AuthRegisterImport } from './routes/auth/register'
+import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as ApplicationsSearchImport } from './routes/applications/search'
 import { Route as ApplicationsCreateImport } from './routes/applications/create'
 
@@ -42,13 +42,13 @@ const ApplicationsIndexRoute = ApplicationsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthSignupRoute = AuthSignupImport.update({
-  path: '/auth/sign_up',
+const AuthRegisterRoute = AuthRegisterImport.update({
+  path: '/auth/register',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthSigninRoute = AuthSigninImport.update({
-  path: '/auth/sign_in',
+const AuthLoginRoute = AuthLoginImport.update({
+  path: '/auth/login',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -86,12 +86,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplicationsSearchImport
       parentRoute: typeof rootRoute
     }
-    '/auth/sign_in': {
-      preLoaderRoute: typeof AuthSigninImport
+    '/auth/login': {
+      preLoaderRoute: typeof AuthLoginImport
       parentRoute: typeof rootRoute
     }
-    '/auth/sign_up': {
-      preLoaderRoute: typeof AuthSignupImport
+    '/auth/register': {
+      preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
     '/applications/': {
@@ -109,8 +109,8 @@ export const routeTree = rootRoute.addChildren([
   GatheringRoute,
   ApplicationsCreateRoute,
   ApplicationsSearchRoute,
-  AuthSigninRoute,
-  AuthSignupRoute,
+  AuthLoginRoute,
+  AuthRegisterRoute,
   ApplicationsIndexRoute,
 ])
 
