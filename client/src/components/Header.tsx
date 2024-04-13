@@ -19,7 +19,7 @@ const Header = () => {
                         <Link to="/">Контакти</Link>
                     </li>
                     <Button size="sm" asChild>
-                        <Link to="/cabinet">Створити заявку</Link>
+                        <Link to="/applications/create">Створити заявку</Link>
                     </Button>
                 </ul>
             </nav>
