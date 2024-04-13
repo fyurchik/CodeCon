@@ -7,15 +7,17 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Input from "@/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/Select";
 import { Textarea } from "@/ui/Textarea";
+import { Checkbox } from "@/ui/Сheckbox";
 
 const Create = () => {
     const form = useForm<AplicationSchema>({
         resolver: zodResolver(aplicationSchema),
         defaultValues: {
-            requestArea: "Введіть текст",
-            desciptionArea: "Введіть текст",
-            age: 18,
-            city: "Київ",
+            requestArea: "",
+            desciptionArea: "",
+            age: 0,
+            city: "",
+            categories: [],
         },
     });
 
@@ -82,7 +84,7 @@ const Create = () => {
                                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                                     <FormControl>
                                                         <SelectTrigger className="mt-6">
-                                                            <SelectValue placeholder="Select a verified email to display" />
+                                                            <SelectValue placeholder="Оберіть Ваш обласний центр" />
                                                         </SelectTrigger>
                                                     </FormControl>
                                                     <SelectContent>
@@ -95,6 +97,25 @@ const Create = () => {
                                         )}
                                     />
                                 </div>
+                                <section className="mt-6">
+                                    <h4>Категорії</h4>
+                                    <CardDescription>Оберіть</CardDescription>
+
+                                    <FormField
+                                        control={form.control}
+                                        name="categories"
+                                        render={({ field }) => (
+                                            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                                                <FormControl>
+                                                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                                                </FormControl>
+                                                <div className="space-y-1 leading-none">
+                                                    <FormLabel>Use different settings for my mobile devices</FormLabel>
+                                                </div>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </section>
                             </section>
                         </form>
                     </Form>
