@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'AuthorizationAPI',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.CommonMiddleware',     
+
 ]
 
 ROOT_URLCONF = 'ICareBack.urls'
@@ -113,7 +115,14 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES':[
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',        
-    ],    
+    ],  
+    'DEFAULT_PERMISSION_CLASSES': (
+    'rest_framework.permissions.AllowAny',    
+    ),  
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
 }
 
 # Internationalization
