@@ -45,7 +45,7 @@ const Page = () => {
                                     <FormItem>
                                         <FormLabel>Ім&apos;я</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="" {...field} />
+                                            <Input placeholder="Петро" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -58,7 +58,7 @@ const Page = () => {
                                     <FormItem>
                                         <FormLabel>Прізвище</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="" {...field} />
+                                            <Input placeholder="Петренко" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
