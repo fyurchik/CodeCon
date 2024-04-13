@@ -1,21 +1,25 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { useContext } from "react";
+import Header from "@/components/Header";
 import { ThemeContext } from "@/context/Theme";
 
 const Page = () => {
     const { theme } = useContext(ThemeContext);
 
     return (
-        <main
-            className={`
+        <>
+            <Header />
+            <main
+                className={`
                     ${theme === "dark" ? "dark" : ""} relative h-screen w-full grow overflow-auto bg-background p-4 text-foreground
                     sm:p-6
                     md:px-8 md:py-7
-                    lg:pl-12 lg:pr-14
+                    lg:px-12
                 `}
-        >
-            <Outlet />
-        </main>
+            >
+                <Outlet />
+            </main>
+        </>
     );
 };
 
