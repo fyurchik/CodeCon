@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
-import { z as zod } from "zod";
+import { registerSchema, RegisterSchema } from "@/types/auth";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
@@ -9,30 +9,9 @@ import Input from "@/ui/Input";
 import Label from "@/ui/Label";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 
-const schema = zod
-    .object({
-        firstName: zod.string().trim().min(1, { message: "Enter your first name" }),
-        lastName: zod.string().trim().min(1, { message: "Enter your last name" }),
-        email: zod.string().min(1, { message: "Enter your email" }),
-        role: zod.enum(["in_need", "volonteer"]),
-        password: zod
-            .string()
-            .trim()
-            .min(1, { message: "Enter your password" })
-            .min(8, { message: "Password must be at least 8 characters long" })
-            .max(255, { message: "Password must be at most 255 characters long" }),
-        confirmPassword: zod.string().trim().min(1, { message: "Confirm your password" }),
-    })
-    .refine((schemaData) => schemaData.password === schemaData.confirmPassword, {
-        message: "Passwords must match",
-        path: ["confirmPassword"],
-    });
-
-type Schema = zod.infer<typeof schema>;
-
 const Page = () => {
-    const form = useForm<Schema>({
-        resolver: zodResolver(schema),
+    const form = useForm<RegisterSchema>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             firstName: "",
             lastName: "",
