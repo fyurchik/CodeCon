@@ -22,4 +22,18 @@ export const registerSchema = zod
         path: ["confirmPassword"],
     });
 
+export const loginSchema = zod.object({
+    email: zod
+        .string()
+        .email({ message: "Введіть вірну електронну адресу" })
+        .min(1, { message: "Введіть вашу електронну адресу" }),
+    password: zod
+        .string()
+        .trim()
+        .min(1, { message: "Введіть ваш пароль" })
+        .min(8, { message: "Пароль має бути мінімум 8 символів" })
+        .max(255, { message: "Пароль не можу бути довшим за 255 символів" }),
+});
+
 export type RegisterSchema = zod.infer<typeof registerSchema>;
+export type LoginSchema = zod.infer<typeof loginSchema>;

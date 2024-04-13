@@ -1,15 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
-import { registerSchema, RegisterSchema } from "@/types/auth";
+import { loginSchema, LoginSchema } from "@/types/auth";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
 
 const Page = () => {
-    const formLogin = useForm<RegisterSchema>({
-        resolver: zodResolver(registerSchema),
+    const formLogin = useForm<LoginSchema>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
             password: "",
@@ -18,7 +18,9 @@ const Page = () => {
 
     // const signUpHandler = useSignUp();
 
-    const onSubmit = (values: RegisterSchema) => {
+    const onSubmit = (values: LoginSchema) => {
+        console.log(values);
+
         // signUpHandler.mutate({ email: values.email, password: values.password });
     };
 
