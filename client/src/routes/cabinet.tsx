@@ -24,9 +24,6 @@ const Page = () => {
 
     return (
         <section>
-            <Link to="/" className="underline">
-                Повернутись на головну
-            </Link>
             <div className="mt-4 flex items-center gap-8">
                 <h1 className="text-4xl">Вітаю, username</h1>
                 <Button>Потребую допомоги</Button>
@@ -34,7 +31,7 @@ const Page = () => {
             <section className="mt-6">
                 <Card className="w-full max-w-md">
                     <CardHeader>
-                        <CardTitle className="text-2xl">Базова інформація</CardTitle>
+                        <CardTitle>Базова інформація</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Form {...form}>
@@ -84,6 +81,14 @@ const Page = () => {
                         </Form>
                     </CardContent>
                 </Card>
+            </section>
+            <section>
+                <div className="flex items-center justify-between">
+                    <h2 className="mt-6 text-2xl font-medium">Актуальні заявки:</h2>
+                    <Button asChild>
+                        <Link to="/applications/create">Створити заявку</Link>
+                    </Button>
+                </div>
             </section>
         </section>
     );

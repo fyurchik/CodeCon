@@ -10,6 +10,9 @@ const Header = () => {
             <nav>
                 <ul className="flex flex-row items-center gap-16">
                     <li>
+                        <Link to="/">Головна</Link>
+                    </li>
+                    <li>
                         <Link to="/applications/search">Пошук заявок</Link>
                     </li>
                     <li>
