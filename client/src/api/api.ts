@@ -1,8 +1,7 @@
 import ky from "ky";
-import { env } from "@/env";
 
 export const api = ky.create({
-    prefixUrl: env.VITE_BACKEND_URL,
+    prefixUrl: "http://10.4.121.227:8000/",
     headers: {
         "Content-Type": "application/json",
     },
