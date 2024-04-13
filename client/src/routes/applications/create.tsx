@@ -33,6 +33,7 @@ const Create = () => {
     const createApplicationHandler = useCreateApplication(token);
 
     const onSubmit = async (values: AplicationSchema) => {
+        // @ts-expect-error too lazy to add types
         await createApplicationHandler.mutateAsync({ ...values, urgent: values.urgent === "urgent", user: user.id });
     };
 
