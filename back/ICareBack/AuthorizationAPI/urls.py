@@ -6,4 +6,5 @@ urlpatterns = [
     path('register/', UserRegisterAPIView.as_view()),
     path('login/', UserLoginAPIView.as_view(), name='login'),
     path('logout/', UserLogoutAPIView.as_view(), name='logout'),
+    path('getuserdata/', views.getdata, name='userinfo'),
 ]

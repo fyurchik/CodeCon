@@ -14,6 +14,12 @@ class UserLoginSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "username", "password"]
 
+class UserShowInfo(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "first_name",
+        "last_name", "email"]
+
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     id = serializers.PrimaryKeyRelatedField(read_only=True)
