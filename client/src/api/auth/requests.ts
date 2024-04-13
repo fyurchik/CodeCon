@@ -7,6 +7,18 @@ export const healthcheck = async () => {
 };
 
 export const register = async (data: RegisterSchema) => {
-    const res = await api.post("authorize/register/", { json: data }).json();
+    const res = await api
+        .post("authorize/register/", {
+            json: {
+                first_name: data.firstName,
+                last_name: data.lastName,
+                email: data.email,
+                // role: data.role,
+                username: data.email,
+                password: data.password,
+                password2: data.password,
+            },
+        })
+        .json();
     return res;
 };

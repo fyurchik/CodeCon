@@ -2,6 +2,7 @@ import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { useContext } from "react";
 import Header from "@/components/Header";
 import { ThemeContext } from "@/context/Theme";
+import Toaster from "@/ui/Toast";
 
 const Page = () => {
     const { theme } = useContext(ThemeContext);
@@ -18,6 +19,7 @@ const Page = () => {
                 `}
             >
                 <Outlet />
+                <Toaster />
             </main>
         </>
     );
