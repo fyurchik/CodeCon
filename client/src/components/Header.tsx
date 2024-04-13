@@ -13,17 +13,20 @@ const Header = () => {
     };
 
     return (
-        <header className="fixed inset-x-0 top-0 z-[1000] flex flex-row items-center justify-between bg-card p-4 shadow-md md:px-8 lg:px-12">
+        <header className="border:[#D4D4D4] fixed inset-x-0 top-0 z-[1000] flex flex-row items-center justify-between bg-[#F5F5F5] p-4 opacity-80 shadow-md md:px-8 lg:px-12">
             <p>
                 <Link to="/">Logo</Link>
             </p>
             <nav>
                 <ul className="flex flex-row items-center gap-16">
                     <li>
-                        <Link to="/">Головна</Link>
+                        <Link to="/">Про сервіс</Link>
                     </li>
                     <li>
-                        <Link to="/applications/search">Пошук заявок</Link>
+                        <Link to="/">Як працює</Link>
+                    </li>
+                    <li>
+                        <Link to="/">Контакти</Link>
                     </li>
                     {isAuthorized && (
                         <Button onClick={onSubmit} size="sm" loading={logoutHandler.isPending}>
@@ -37,9 +40,14 @@ const Header = () => {
                             </Button>
                         )
                     ) : (
-                        <Button size="sm" asChild>
-                            <Link to="/auth/login">Увійти</Link>
-                        </Button>
+                        <>
+                            <Button size="lg" variant="secondary" asChild>
+                                <Link to="/auth/login">Увійти</Link>
+                            </Button>
+                            <Button size="lg" variant="default" asChild>
+                                <Link to="/auth/register">Зареєструватись</Link>
+                            </Button>
+                        </>
                     )}
                 </ul>
             </nav>
