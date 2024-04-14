@@ -1,10 +1,8 @@
-
-from rest_framework import serializers
-from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
-from rest_framework import status
 from rest_framework.authtoken.models import Token
-from .models import Profile, Application
+from rest_framework import serializers, status
+from django.contrib.auth.models import User
+from .models import Profile, Application, Tag
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
@@ -22,6 +20,16 @@ class UserShowInfo(serializers.ModelSerializer):
         model = User
         fields = ["id", "username", "first_name",
         "last_name", "email", "role"]
+
+class UserUpdateInfo(serializers.ModelSerializer):    
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name"]
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields ='__all__'
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

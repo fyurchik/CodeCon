@@ -11,4 +11,7 @@ urlpatterns = [
     path('makepost/<int:pk>', PostViewSet.as_view({'get': 'retrieve','delete':'destroy'})),    
     path('applications/', views.application_list_view, name='application-list'),
     path('applications/<int:pk>', views.application_list_view),
+    path('applications/my/', views.myapplications),
+    path('applications/my/<int:pk>', views.myapplications),
+    path('applications/tags', views.tags),
 ]
