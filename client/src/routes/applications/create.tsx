@@ -12,7 +12,6 @@ import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/Select";
 import { Textarea } from "@/ui/Textarea";
-import { Checkbox } from "@/ui/Сheckbox";
 
 const Create = () => {
     const { token, user } = useContext(UserContext);
