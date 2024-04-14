@@ -99,8 +99,13 @@ class PostViewSet(viewsets.ModelViewSet):
     
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def application_list_view(request):    
+def application_list_view(request, pk=None):    
     if request.method =='GET':
+        if pk:
+            applications = Application.objects.filter(id=pk)
+            serializer = PostSerializer(applications, many=True)    
+    
+            return Response({"results":serializer.data})
         city = request.query_params.get('city')
         urgent = request.query_params.get('urgent')
         tags = request.query_params.getlist('tags')        
@@ -112,10 +117,10 @@ def application_list_view(request):
 
         allquantity = applications.count()
         quantity = allquantity//5
-        print(tags)
+        
         if tags and tags != ['all']:        
             applications = applications.filter(tags__name__in=tags)
-        print(applications)
+        
         if urgent != "all":         
             applications = applications.filter(urgent=urgent)
         if city:

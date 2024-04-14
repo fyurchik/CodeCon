@@ -74,8 +74,18 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
         return user
 
+# class PostSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Application
+#         fields = '__all__'
 class PostSerializer(serializers.ModelSerializer):
+    tags = serializers.SerializerMethodField()  # Custom field to include tag names
+    
     class Meta:
         model = Application
         fields = '__all__'
+    
+    def get_tags(self, instance):
+        return list(instance.tags.values_list('name', flat=True))
+
 
