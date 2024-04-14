@@ -37,21 +37,21 @@ const Page = () => {
                     Вітаю, {user?.first_name} {user?.last_name}
                 </h1>
                 {user?.role === "SimpleUser" ? (
-                    <Badge className=" flex h-14 w-64 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
+                    <Badge className=" flex h-10 w-52 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
                         Потребую допомоги
                     </Badge>
                 ) : (
-                    <Badge className="flex h-14 w-64 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
+                    <Badge className="flex h-10 w-52 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
                         Допомагаю
                     </Badge>
                 )}
             </div>
             <section className="mt-6">
-                <Card className=" w-full max-w-md">
-                    <CardHeader>
-                        <CardTitle>Базова інформація</CardTitle>
+                <div className=" w-full max-w-md">
+                    <CardHeader className="px-0">
+                        <CardTitle className="font-normal">Базова інформація:</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="px-0">
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="grid max-w-sm gap-4">
                                 <div className="flex grow flex-row gap-4">
@@ -60,7 +60,7 @@ const Page = () => {
                                         name="firstName"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Ім&apos;я</FormLabel>
+                                                <FormLabel>Ваше ім&apos;я:</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Петро" {...field} />
                                                 </FormControl>
@@ -73,7 +73,7 @@ const Page = () => {
                                         name="lastName"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Прізвище</FormLabel>
+                                                <FormLabel>Ваше прізвище:</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Петренко" {...field} />
                                                 </FormControl>
@@ -87,7 +87,7 @@ const Page = () => {
                                     name="email"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Електронна пошта</FormLabel>
+                                            <FormLabel>Електронна пошта:</FormLabel>
                                             <FormControl>
                                                 <Input placeholder="mail@example.com" disabled readOnly {...field} />
                                             </FormControl>
@@ -98,7 +98,7 @@ const Page = () => {
                             </form>
                         </Form>
                     </CardContent>
-                </Card>
+                </div>
             </section>
             {user?.role === "SimpleUser" && (
                 <section className="flex flex-col gap-6">
