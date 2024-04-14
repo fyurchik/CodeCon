@@ -52,9 +52,13 @@ export const getUserData = async (token: string | null) => {
     return res;
 };
 
-export const updateUserData = async (token: string | null, data: { first_name: string; last_name: string }) => {
+export const updateUserData = async (
+    token: string | null,
+    data: { first_name: string; last_name: string },
+    id: string
+) => {
     const res = await api
-        .put("authorize/getuserdata/", {
+        .put(`authorize/getuserdata/${id}`, {
             json: data,
             headers: {
                 Authorization: `Token ${token}`,

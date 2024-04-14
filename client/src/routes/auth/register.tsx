@@ -125,7 +125,7 @@ const Page = () => {
                                                 <FormControl>
                                                     <RadioGroupItem value="in_need" className="peer hidden" />
                                                 </FormControl>
-                                                <FormLabel className="peer- flex h-16 w-full items-center  space-y-0  rounded-bl-full rounded-tl-full px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
+                                                <FormLabel className="peer flex h-16 w-full items-center  space-y-0  rounded-bl-full rounded-tl-full px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
                                                     потребує допомоги
                                                 </FormLabel>
                                             </FormItem>
