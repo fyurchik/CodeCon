@@ -13,7 +13,7 @@ export const createApplication = async (token: string | null, data: AplicationSc
     return res;
 };
 
-export const getApplications = async (token: string | null) => {
+export const getApplications = async (token: string | null, page: number) => {
     const res = await api
         .get("authorize/applications/", {
             headers: {
@@ -22,8 +22,7 @@ export const getApplications = async (token: string | null) => {
         })
         .json<{
             count: number;
-            next: string;
-            previous: string;
+            pages: number;
             results: {
                 active: boolean;
                 age: number;

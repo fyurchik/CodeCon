@@ -27,16 +27,12 @@ export const useCreateApplication = (token: string | null) => {
 };
 
 export const useApplications = (token: string | null) => {
-    // return useQuery({
-    //     queryKey: ["applications", token],
-    //     queryFn: () => getApplications(token),
-    // });
     return useInfiniteQuery({
         queryKey: ["notes", token],
-        queryFn: () => getApplications(token),
+        queryFn: ({ pageParam }) => getApplications(token, pageParam),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {
-            if (lastPage.next) {
+            if (allPages.length < lastPage.pages) {
                 return allPages.length + 1;
             }
             return null;
