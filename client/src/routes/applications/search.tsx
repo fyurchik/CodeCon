@@ -28,7 +28,7 @@ const Page = () => {
             <aside className="fixed left-0 top-0 z-[999] flex h-screen flex-col gap-4 overflow-auto border-r-[1px] border-[#D4D4D4] pl-8 pr-[50px] pt-24">
                 <div className="flex flex-col gap-2">
                     <h3 className="text-[28px] font-medium">Фільтри пошуку</h3>
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-4">
                         <Link
                             to="/applications/search"
                             search={(prev) => ({ ...prev, urgency: "all" })}
