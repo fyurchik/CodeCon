@@ -14,11 +14,11 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as GatheringImport } from './routes/gathering'
 import { Route as CabinetImport } from './routes/cabinet'
 import { Route as IndexImport } from './routes/index'
-import { Route as ApplicationsIndexImport } from './routes/applications/index'
 import { Route as AuthRegisterImport } from './routes/auth/register'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as ApplicationsSearchImport } from './routes/applications/search'
 import { Route as ApplicationsCreateImport } from './routes/applications/create'
+import { Route as ApplicationsIdImport } from './routes/applications/$id'
 
 // Create/Update Routes
 
@@ -34,11 +34,6 @@ const CabinetRoute = CabinetImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ApplicationsIndexRoute = ApplicationsIndexImport.update({
-  path: '/applications/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -62,6 +57,11 @@ const ApplicationsCreateRoute = ApplicationsCreateImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ApplicationsIdRoute = ApplicationsIdImport.update({
+  path: '/applications/$id',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -76,6 +76,10 @@ declare module '@tanstack/react-router' {
     }
     '/gathering': {
       preLoaderRoute: typeof GatheringImport
+      parentRoute: typeof rootRoute
+    }
+    '/applications/$id': {
+      preLoaderRoute: typeof ApplicationsIdImport
       parentRoute: typeof rootRoute
     }
     '/applications/create': {
@@ -94,10 +98,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
-    '/applications/': {
-      preLoaderRoute: typeof ApplicationsIndexImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -107,11 +107,11 @@ export const routeTree = rootRoute.addChildren([
   IndexRoute,
   CabinetRoute,
   GatheringRoute,
+  ApplicationsIdRoute,
   ApplicationsCreateRoute,
   ApplicationsSearchRoute,
   AuthLoginRoute,
   AuthRegisterRoute,
-  ApplicationsIndexRoute,
 ])
 
 /* prettier-ignore-end */

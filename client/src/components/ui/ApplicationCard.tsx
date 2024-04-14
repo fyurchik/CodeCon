@@ -96,7 +96,9 @@ const ApplicationCard = ({
                 ) : (
                     <div className="mt-6 flex items-center gap-4">
                         <Button asChild>
-                            <Link to="/applications">Переглянути заявку</Link>
+                            <Link to="/applications/$id" params={{ id }}>
+                                Переглянути заявку
+                            </Link>
                         </Button>
                     </div>
                 )}

@@ -1,10 +1,14 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
-import { useContext } from "react";
 import { toast } from "sonner";
-import { createApplication, deleteApplication, getApplications, getMyApplications, getTags } from "./requests";
-import { UserContext } from "@/context/User";
+import {
+    createApplication,
+    deleteApplication,
+    getApplication,
+    getApplications,
+    getMyApplications,
+    getTags,
+} from "./requests";
 import { AplicationSchema } from "@/types/aplication";
 
 export const useCreateApplication = (token: string | null) => {
@@ -76,5 +80,14 @@ export const useTags = () => {
     return useQuery({
         queryKey: ["tags"],
         queryFn: async () => getTags(),
+    });
+};
+
+export const useApplication = (id: number, token: string | null) => {
+    return useQuery({
+        queryKey: ["application", id, token],
+        // queryFn: async () =>
+        //     getApplications(token, 1, "all", "", "", "").then((res) => res.results.find((app) => app.id === id)),
+        queryFn: async () => getApplication(token, id),
     });
 };

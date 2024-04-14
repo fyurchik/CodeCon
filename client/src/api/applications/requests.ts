@@ -90,3 +90,30 @@ export const getTags = async () => {
     const res = await api.get("authorize/applications/tags").json<{ tags: { id: number; name: string }[] }>();
     return res;
 };
+
+export const getApplication = async (token: string | null, id: number) => {
+    const res = await api
+        .get(`authorize/applications/${id}`, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .json<{
+            results: [
+                {
+                    id: number;
+                    tags: string[];
+                    title: string;
+                    content: string;
+                    active: true;
+                    urgent: "urgent" | "not_urgent";
+                    age: number;
+                    phone_number: string;
+                    city: string;
+                    email: string;
+                    user: number;
+                },
+            ];
+        }>();
+    return res;
+};
