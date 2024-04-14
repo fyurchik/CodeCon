@@ -24,9 +24,9 @@ const Page = () => {
     };
 
     return (
-        <Card className="mx-auto w-full max-w-md md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+        <Card className="mx-auto w-full max-w-md rounded-3xl md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <CardHeader>
-                <CardTitle className="text-2xl">Увійти в аккаунт</CardTitle>
+                <CardTitle className="mb-20 text-center text-2xl">logo</CardTitle>
             </CardHeader>
             <CardContent>
                 <Form {...formLogin}>
@@ -36,9 +36,8 @@ const Page = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Електронна пошта</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="mail@example.com" {...field} />
+                                        <Input placeholder="Електронна пошта" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -49,25 +48,29 @@ const Page = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Пароль</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" />
+                                        <Input {...field} type="password" placeholder="Пароль" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" loading={formLogin.formState.isSubmitting}>
+                        <Button
+                            type="submit"
+                            size="lg"
+                            className="mb-8 mt-8 h-16"
+                            loading={formLogin.formState.isSubmitting}
+                        >
                             Увійти
                         </Button>
                     </form>
                 </Form>
-                <p className="mt-4 text-center text-sm">
-                    Не маєте аккаунту?{" "}
-                    <Link to="/auth/register" className="underline">
+                <div className="mt-4 flex flex-row items-center justify-between gap-2 px-10">
+                    <p className="text-center text-sm">Не маєте аккаунту? </p>
+                    <Link to="/auth/register" className="underline transition duration-300 hover:text-[#6B6B6B]">
                         Зареєструватись
                     </Link>
-                </p>
+                </div>
             </CardContent>
         </Card>
     );
