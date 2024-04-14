@@ -44,7 +44,7 @@ const Page = () => {
                     </Badge>
                 ) : (
                     <Badge className="mt-3 flex h-10 w-44 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
-                        Допомагаю
+                        Допомагаю людям
                     </Badge>
                 )}
             </div>
@@ -68,7 +68,7 @@ const Page = () => {
                                                 <FormControl>
                                                     <div className="relative">
                                                         <Input
-                                                            className="w-[420px]"
+                                                            className="w-[420px] p-7"
                                                             placeholder="Введіть Ваше ім'я:"
                                                             {...field}
                                                         />
@@ -94,7 +94,7 @@ const Page = () => {
                                                 <FormControl>
                                                     <div className="relative">
                                                         <Input
-                                                            className="w-[420px]"
+                                                            className="w-[420px] p-7"
                                                             placeholder="Введіть Ваше прізвище:"
                                                             {...field}
                                                         />
@@ -119,7 +119,7 @@ const Page = () => {
                                                 <FormLabel>Електронна пошта:</FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        className="w-[420px]"
+                                                        className="w-[420px] p-7"
                                                         placeholder="mail@example.com"
                                                         disabled
                                                         readOnly
