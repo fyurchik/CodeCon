@@ -16,7 +16,7 @@ import Input from "@/ui/Input";
 import { useUpdateUserData } from "@/api/auth/hooks";
 
 const Page = () => {
-    const { user, token } = useContext(UserContext);
+    const { user, token, setUser } = useContext(UserContext);
     const form = useForm<BaseUserSchema>({
         resolver: zodResolver(baseUserSchema),
         defaultValues: {
@@ -27,10 +27,13 @@ const Page = () => {
     });
 
     const applications = useMyApplications(token);
-    const updateUserDataHandler = useUpdateUserData();
 
     const onSubmit = async (values: BaseUserSchema) => {
-        await updateUserDataHandler.mutateAsync({ first_name: values.firstName, last_name: values.lastName });
+        setUser({ ...user, first_name: values.firstName, last_name: values.lastName });
+        localStorage.setItem(
+            "user",
+            JSON.stringify({ ...user, first_name: values.firstName, last_name: values.lastName })
+        );
     };
 
     return (

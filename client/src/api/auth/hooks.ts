@@ -91,10 +91,10 @@ export const useUserData = (token: string | null) => {
 };
 
 export const useUpdateUserData = () => {
-    const { token, user } = useContext(UserContext);
+    const { token, user, setUser } = useContext(UserContext);
     const QueryClient = useQueryClient();
     return useMutation({
-        mutationFn: (data: { first_name: string; last_name: string }) =>
+        mutationFn: (data: { firstName: string; lastName: string }) =>
             updateUserData(token, { first_name: data.firstName, last_name: data.lastName }, user.id),
         onError: async (err) => {
             if (err instanceof HTTPError) {
