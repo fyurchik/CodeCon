@@ -25,7 +25,7 @@ export const variants = cva(
                 footer: "bg-secondary text-secondary-foreground ring-secondary-foreground hover:bg-secondary/80 hover:bg-[#EDF6EC] transition duration-500",
             },
             size: {
-                default: "h-10 px-4 py-2",
+                default: "h-10 px-4 py-2 rounded-full",
                 sm: "h-9 rounded-full px-3",
                 lg: "h-11 rounded-full px-8",
                 link: "h-auto p-0 underline",
