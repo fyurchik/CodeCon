@@ -38,6 +38,11 @@ const Header = () => {
                         </Link>
                     </li>
                     {isAuthorized && (
+                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/applications/search">
+                            Пошук заявок
+                        </Link>
+                    )}
+                    {isAuthorized && (
                         <Button onClick={onSubmit} size="sm" loading={logoutHandler.isPending}>
                             Вийти
                         </Button>
