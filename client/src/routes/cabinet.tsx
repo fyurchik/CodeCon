@@ -10,6 +10,8 @@ import Badge from "@/ui/Badge";
 import Button from "@/ui/Button";
 import { CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
+import VectorImg from "../assets/Vector.svg";
+import PenImg from "../assets/pen.svg";
 import Input from "@/ui/Input";
 
 const Page = () => {
@@ -37,11 +39,11 @@ const Page = () => {
                     Вітаю, {user?.first_name} {user?.last_name}
                 </h1>
                 {user?.role === "SimpleUser" ? (
-                    <Badge className=" flex h-10 w-52 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
+                    <Badge className="mt-3 flex h-10 w-44 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
                         Потребую допомоги
                     </Badge>
                 ) : (
-                    <Badge className="flex h-10 w-52 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
+                    <Badge className="mt-3 flex h-10 w-44 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
                         Допомагаю
                     </Badge>
                 )}
@@ -60,9 +62,22 @@ const Page = () => {
                                         name="firstName"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Ваше ім&apos;я:</FormLabel>
+                                                <FormLabel className="text-xl font-normal leading-6">
+                                                    Ваше ім&apos;я:
+                                                </FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="Петро" {...field} />
+                                                    <div className="relative">
+                                                        <Input
+                                                            className="w-[420px]"
+                                                            placeholder="Введіть Ваше ім'я:"
+                                                            {...field}
+                                                        />
+                                                        <img
+                                                            className="absolute right-4 top-5 "
+                                                            src={PenImg}
+                                                            alt="penImg"
+                                                        />
+                                                    </div>
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -73,28 +88,57 @@ const Page = () => {
                                         name="lastName"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Ваше прізвище:</FormLabel>
+                                                <FormLabel className="text-xl font-normal leading-6">
+                                                    Ваше прізвище:
+                                                </FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="Петренко" {...field} />
+                                                    <div className="relative">
+                                                        <Input
+                                                            className="w-[420px]"
+                                                            placeholder="Введіть Ваше прізвище:"
+                                                            {...field}
+                                                        />
+                                                        <img
+                                                            className="absolute right-4 top-5 "
+                                                            src={PenImg}
+                                                            alt="penImg"
+                                                        />
+                                                    </div>
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         )}
                                     />
                                 </div>
-                                <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Електронна пошта:</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="mail@example.com" disabled readOnly {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                <div className="flex flex-row items-end gap-4">
+                                    <FormField
+                                        control={form.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Електронна пошта:</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        className="w-[420px]"
+                                                        placeholder="mail@example.com"
+                                                        disabled
+                                                        readOnly
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <Button
+                                        type="submit"
+                                        size="lg"
+                                        className="h-16 w-[420px]"
+                                        loading={form.formState.isSubmitting}
+                                    >
+                                        Зберегти зміни
+                                    </Button>
+                                </div>
                             </form>
                         </Form>
                     </CardContent>
@@ -109,7 +153,10 @@ const Page = () => {
                         </Button>
                     </div>
                     {applications.data?.results.length < 1 ? (
-                        <p className="text-center">Тут поки порожньо...</p>
+                        <>
+                            <img className="h-[293px] w-[293px] self-center" src={VectorImg} alt="noMessagesIcon" />
+                            <p className="text-center">Тут поки порожньо...</p>
+                        </>
                     ) : (
                         applications.data?.results.map((application) => (
                             <ApplicationCard key={application.id} application={application} />
