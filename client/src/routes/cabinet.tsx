@@ -32,7 +32,7 @@ const Page = () => {
                 <h1 className="text-4xl">
                     Вітаю, {user?.first_name} {user?.last_name}
                 </h1>
-                {user?.role === "in_need" ? <Button>Потребую допомоги</Button> : <Button>Допомагаю</Button>}
+                {user?.role === "SimpleUser" ? <Button>Потребую допомоги</Button> : <Button>Допомагаю</Button>}
             </div>
             <section className="mt-6">
                 <Card className="w-full max-w-md">
@@ -88,7 +88,7 @@ const Page = () => {
                     </CardContent>
                 </Card>
             </section>
-            {user?.role === "in_need" && (
+            {user?.role === "SimpleUser" && (
                 <section className="flex flex-col gap-6">
                     <div className="flex items-center justify-between">
                         <h2 className="mt-6 text-2xl font-medium">Актуальні заявки:</h2>
@@ -99,15 +99,17 @@ const Page = () => {
                     {/* <p className="text-center">Тут поки порожньо...</p> */}
                     <ApplicationCard
                         application={{
+                            email: "asdddsadasd@example.com",
+                            phone_number: "=380778889900",
                             active: true,
                             age: 19,
                             city: "Lviv",
-                            description: "What da fak is dis",
+                            content: "What da fak is dis",
                             id: 24,
-                            tags: ["fuck", "me"],
+                            tags: [1, 2],
                             title: "Dafak",
-                            urgency: "urgent",
-                            userId: 24,
+                            urgent: "urgent",
+                            user: 24,
                         }}
                     />
                 </section>
