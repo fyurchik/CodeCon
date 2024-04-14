@@ -45,3 +45,28 @@ export const getApplications = async (
         }>();
     return res;
 };
+
+export const getMyApplications = async (token: string | null) => {
+    const res = await api
+        .get("authorize/applications/my", {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .json<{
+            results: {
+                active: boolean;
+                age: number;
+                city: string;
+                content: string;
+                email: string;
+                id: number;
+                phone_number: string;
+                tags: number[];
+                title: string;
+                urgent: "urgent" | "not_urgent";
+                user: number;
+            }[];
+        }>();
+    return res;
+};

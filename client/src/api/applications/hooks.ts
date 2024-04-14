@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
 import { useContext } from "react";
 import { toast } from "sonner";
-import { createApplication, getApplications } from "./requests";
+import { createApplication, getApplications, getMyApplications } from "./requests";
 import { UserContext } from "@/context/User";
 import { AplicationSchema } from "@/types/aplication";
 
@@ -42,5 +42,12 @@ export const useApplications = (
             }
             return null;
         },
+    });
+};
+
+export const useMyApplications = (token: string | null) => {
+    return useQuery({
+        queryKey: ["myApplications", token],
+        queryFn: () => getMyApplications(token),
     });
 };

@@ -2,17 +2,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useMyApplications } from "@/api/applications/hooks";
 import { UserContext } from "@/context/User";
 import { BaseUserSchema, baseUserSchema } from "@/types/auth";
 import ApplicationCard from "@/ui/ApplicationCard";
+import Badge from "@/ui/Badge";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
-import Badge from "@/ui/Badge";
 
 const Page = () => {
-    const { user } = useContext(UserContext);
+    const { user, token } = useContext(UserContext);
     const form = useForm<BaseUserSchema>({
         resolver: zodResolver(baseUserSchema),
         defaultValues: {
@@ -21,6 +22,8 @@ const Page = () => {
             email: user?.email,
         },
     });
+
+    const applications = useMyApplications(token);
 
     const onSubmit = (values: BaseUserSchema) => {
         console.log(values);
@@ -105,22 +108,13 @@ const Page = () => {
                             <Link to="/applications/create">Створити заявку</Link>
                         </Button>
                     </div>
-                    {/* <p className="text-center">Тут поки порожньо...</p> */}
-                    <ApplicationCard
-                        application={{
-                            email: "asdddsadasd@example.com",
-                            phone_number: "=380778889900",
-                            active: true,
-                            age: 19,
-                            city: "Lviv",
-                            content: "What da fak is dis",
-                            id: 24,
-                            tags: [1, 2],
-                            title: "Dafak",
-                            urgent: "urgent",
-                            user: 24,
-                        }}
-                    />
+                    {applications.data?.results.length < 1 ? (
+                        <p className="text-center">Тут поки порожньо...</p>
+                    ) : (
+                        applications.data?.results.map((application) => (
+                            <ApplicationCard key={application.id} application={application} />
+                        ))
+                    )}
                 </section>
             )}
         </section>
