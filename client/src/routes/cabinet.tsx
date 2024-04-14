@@ -9,6 +9,7 @@ import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
+import Badge from "@/ui/Badge";
 
 const Page = () => {
     const { user } = useContext(UserContext);
@@ -27,15 +28,23 @@ const Page = () => {
     };
 
     return (
-        <section>
+        <section className="ml-52 mt-20">
             <div className="mt-4 flex items-center gap-8">
-                <h1 className="text-4xl">
+                <h1 className="text-6xl font-normal">
                     Вітаю, {user?.first_name} {user?.last_name}
                 </h1>
-                {user?.role === "SimpleUser" ? <Button>Потребую допомоги</Button> : <Button>Допомагаю</Button>}
+                {user?.role === "SimpleUser" ? (
+                    <Badge className=" flex h-14 w-64 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
+                        Потребую допомоги
+                    </Badge>
+                ) : (
+                    <Badge className="flex h-14 w-64 justify-center bg-[#158F0A] bg-[#158F0A]/10 text-[#158F0A]">
+                        Допомагаю
+                    </Badge>
+                )}
             </div>
             <section className="mt-6">
-                <Card className="w-full max-w-md">
+                <Card className=" w-full max-w-md">
                     <CardHeader>
                         <CardTitle>Базова інформація</CardTitle>
                     </CardHeader>
