@@ -11,6 +11,9 @@ from rest_framework.exceptions import ValidationError
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserShowInfo, PostSerializer
 from .permissions import IsVolonteer, IsSimpleUser
 from .models import Application
+from django.core.paginator import Paginator, EmptyPage
+
+from rest_framework.pagination import PageNumberPagination 
 
 
 @api_view(['GET'])
@@ -91,3 +94,21 @@ class PostViewSet(viewsets.ModelViewSet):
             permission_classes = self.permission_classes    
         return [permission() for permission in permission_classes]
     
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])# urgent, city, tags 
+def application_list_view(request):    
+    applications = Application.objects.all()
+    allquantity = applications.count()
+    quantity = allquantity//5
+
+    perpage = request.query_params.get('perpage', default = 5)
+    page = request.query_params.get('page', default=1)
+    paginator = Paginator(applications, per_page = perpage)
+    try:
+        applications = paginator.page(number=page)
+    except EmptyPage:
+        applications = []
+
+    serializer = PostSerializer(applications, many=True)    
+    
+    return Response({"results":serializer.data, "allpages":quantity, "all":allquantity})
