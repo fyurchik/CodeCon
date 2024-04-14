@@ -1,14 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Logo from "../../assets/Logo.svg";
 import { useLogin } from "@/api/auth/hooks";
 import { loginSchema, LoginSchema } from "@/types/auth";
 import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
-import { useEffect } from "react";
-import Logo from "../../assets/Logo.svg";
 
 const Page = () => {
     const formLogin = useForm<LoginSchema>({
@@ -45,7 +45,7 @@ const Page = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder="Електронна пошта" {...field} />
+                                        <Input placeholder="Електронна пошта" {...field} className="pl-5" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -57,7 +57,7 @@ const Page = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input {...field} type="password" placeholder="Пароль" />
+                                        <Input {...field} type="password" placeholder="Пароль" className="pl-5" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -66,7 +66,7 @@ const Page = () => {
                         <Button
                             type="submit"
                             size="lg"
-                            className="mb-6 mt-6 h-16"
+                            className="my-6 h-16 "
                             loading={formLogin.formState.isSubmitting}
                         >
                             Увійти

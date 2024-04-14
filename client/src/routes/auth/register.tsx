@@ -1,15 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Logo from "../../assets/Logo.svg";
 import { useRegister } from "@/api/auth/hooks";
 import { registerSchema, RegisterSchema } from "@/types/auth";
 import Button from "@/ui/Button";
-import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
+import { Card, CardHeader, CardContent } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
-import { useEffect } from "react";
-import Logo from "../../assets/Logo.svg";
 
 const Page = () => {
     const form = useForm<RegisterSchema>({
@@ -34,7 +34,6 @@ const Page = () => {
     useEffect(() => {
         document.querySelector("header")?.remove();
     }, []);
-
     return (
         <Card className="mx-auto w-full max-w-md md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <CardHeader>
@@ -52,7 +51,7 @@ const Page = () => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input placeholder="Ім'я" {...field} />
+                                            <Input placeholder="Ім'я" {...field} className="pl-5" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -64,7 +63,7 @@ const Page = () => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormControl>
-                                            <Input placeholder="Прізвище" {...field} />
+                                            <Input placeholder="Прізвище" {...field} className="pl-5" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -77,7 +76,7 @@ const Page = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder="Електронна пошта" {...field} />
+                                        <Input placeholder="Електронна пошта" {...field} className="pl-5" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -89,7 +88,7 @@ const Page = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input {...field} type="password" placeholder="Пароль" />
+                                        <Input {...field} type="password" placeholder="Пароль" className="pl-5" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -105,47 +104,45 @@ const Page = () => {
                                             {...field}
                                             type="password"
                                             placeholder="Підтвердити пароль"
-                                            className="mb-10"
+                                            className="mb-5 pl-5"
                                         />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="role"
-                            render={({ field }) => (
-                                <FormItem className="mb-4 space-y-3">
-                                    <FormLabel className="mb-7 block font-normal ">Ти людина, що потребує...</FormLabel>
-                                    <FormControl>
-                                        <RadioGroup
-                                            onValueChange={field.onChange}
-                                            defaultValue={field.value}
-                                            className="flex flex-row justify-between"
-                                        >
-                                            <FormItem className=" ">
-                                                <FormControl>
-                                                    <RadioGroupItem value="in_need" className="peer hidden" />
-                                                </FormControl>
-                                                <FormLabel className="peer flex h-16 w-full items-center  space-y-0  rounded-bl-full rounded-tl-full px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
-                                                    потребує допомоги
-                                                </FormLabel>
-                                            </FormItem>
-                                            <FormItem>
-                                                <FormControl>
-                                                    <RadioGroupItem value="volonteer" className="peer hidden" />
-                                                </FormControl>
-                                                <FormLabel className="flex h-16 w-full items-center space-y-0 rounded-br-full  rounded-tr-full border-b-[1px] border-r-[1px] border-t-[1px] border-[#D4D4D4] px-10 text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
-                                                    може допомогти
-                                                </FormLabel>
-                                            </FormItem>
-                                        </RadioGroup>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        <section className="mb-10 flex flex-col gap-4">
+                            <h4 className="mb-2 block font-normal ">Ти людина, що потребує...</h4>
+                            <FormField
+                                control={form.control}
+                                name="role"
+                                render={({ field }) => (
+                                    <FormItem className="flex w-min flex-row items-start space-x-3 space-y-0 rounded-md border">
+                                        <FormControl>
+                                            <RadioGroup
+                                                onValueChange={field.onChange}
+                                                defaultValue={field.value}
+                                                className="flex h-24 w-[376px] flex-col justify-center space-y-1"
+                                            >
+                                                <FormItem className="mb-5 flex items-center space-x-3 space-y-0 pl-5">
+                                                    <FormControl>
+                                                        <RadioGroupItem value="in_need" />
+                                                    </FormControl>
+                                                    <FormLabel className=" font-normal ">потребує допомоги</FormLabel>
+                                                </FormItem>
+                                                <FormItem className="mb-5 flex items-center space-x-3 space-y-0 pl-5">
+                                                    <FormControl>
+                                                        <RadioGroupItem value="volunteer" />
+                                                    </FormControl>
+                                                    <FormLabel className=" font-normal ">може допомогти</FormLabel>
+                                                </FormItem>
+                                            </RadioGroup>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </section>
 
                         <Button type="submit" size="lg" className="mb-8 h-16" loading={form.formState.isSubmitting}>
                             Зареєструватись
