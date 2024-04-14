@@ -13,12 +13,12 @@ const Header = () => {
     };
 
     return (
-        <header className="border:[#D4D4D4] fixed inset-x-0 top-0 z-[1000] flex flex-row items-center justify-between bg-[#F5F5F5] p-4 opacity-80 shadow-md md:px-8 lg:px-12">
+        <header className="fixed inset-x-0 top-0 z-[1000] flex flex-row items-center justify-between border-b-[1px] border-[#D4D4D4] bg-background p-4 md:px-8 lg:px-12">
             <p>
                 <Link to="/">Logo</Link>
             </p>
             <nav>
-                <ul className="flex flex-row items-center gap-16">
+                <ul className="flex flex-row items-center gap-12">
                     <li>
                         <Link className="transition duration-300 hover:text-[#6B6B6B] " to="/">
                             Про сервіс
@@ -46,14 +46,14 @@ const Header = () => {
                             </Button>
                         )
                     ) : (
-                        <>
+                        <div className="flex gap-4">
                             <Button size="lg" variant="secondary" asChild>
                                 <Link to="/auth/login">Увійти</Link>
                             </Button>
                             <Button size="lg" variant="default" asChild>
                                 <Link to="/auth/register">Зареєструватись</Link>
                             </Button>
-                        </>
+                        </div>
                     )}
                 </ul>
             </nav>

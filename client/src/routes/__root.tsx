@@ -12,7 +12,7 @@ const Page = () => {
             <Header />
             <main
                 className={`
-                    ${theme === "dark" ? "dark" : ""} relative mt-[68px] min-h-[calc(100vh_-_68px)] w-full grow bg-background p-4 text-foreground
+                    ${theme === "dark" ? "dark" : ""} relative mt-[68px] min-h-[calc(100vh_-_68px)] w-full grow bg-background py-4 text-foreground
                 `}
             >
                 <Outlet />
