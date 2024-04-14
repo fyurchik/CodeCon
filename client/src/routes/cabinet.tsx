@@ -8,7 +8,7 @@ import { BaseUserSchema, baseUserSchema } from "@/types/auth";
 import ApplicationCard from "@/ui/ApplicationCard";
 import Badge from "@/ui/Badge";
 import Button from "@/ui/Button";
-import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
+import { CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
 
