@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 import { useEffect } from "react";
+import Logo from "../../assets/Logo.svg";
 
 const Page = () => {
     const form = useForm<RegisterSchema>({
@@ -37,7 +38,9 @@ const Page = () => {
     return (
         <Card className="mx-auto w-full max-w-md md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <CardHeader>
-                <CardTitle className="mb-20 text-center text-2xl">Реєстрація</CardTitle>
+                <Link to="/" className="mb-20 self-center">
+                    <img src={Logo} alt="logo" />
+                </Link>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -114,26 +117,26 @@ const Page = () => {
                             name="role"
                             render={({ field }) => (
                                 <FormItem className="mb-4 space-y-3">
-                                    <FormLabel className="mb-7 block font-normal">Ти людина, що потребує...</FormLabel>
+                                    <FormLabel className="mb-7 block font-normal ">Ти людина, що потребує...</FormLabel>
                                     <FormControl>
                                         <RadioGroup
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
                                             className="flex flex-row justify-between"
                                         >
-                                            <FormItem className=" ">
-                                                <FormControl>
-                                                    <RadioGroupItem value="in_need" className="peer hidden" />
-                                                </FormControl>
-                                                <FormLabel className="peer- flex h-16 w-full items-center  space-y-0  rounded-bl-full rounded-tl-full px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
-                                                    потребує допомоги
-                                                </FormLabel>
-                                            </FormItem>
-                                            <FormItem className="">
+                                            <FormItem>
                                                 <FormControl>
                                                     <RadioGroupItem value="volonteer" className="peer hidden" />
                                                 </FormControl>
-                                                <FormLabel className="flex h-16 w-full items-center space-y-0  rounded-br-full rounded-tr-full px-10 text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
+                                                <FormLabel className="peer- flex h-16 w-full items-center space-y-0  rounded-bl-full  rounded-tl-full border-b-[1px] border-l-[1px] border-t-[1px] border-[#D4D4D4] px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
+                                                    потребує допомоги
+                                                </FormLabel>
+                                            </FormItem>
+                                            <FormItem>
+                                                <FormControl>
+                                                    <RadioGroupItem value="in_need" className="peer hidden" />
+                                                </FormControl>
+                                                <FormLabel className="flex h-16 w-full items-center space-y-0 rounded-br-full  rounded-tr-full border-b-[1px] border-r-[1px] border-t-[1px] border-[#D4D4D4] px-10 text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
                                                     може допомогти
                                                 </FormLabel>
                                             </FormItem>

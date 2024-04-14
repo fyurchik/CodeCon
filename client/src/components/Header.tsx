@@ -3,6 +3,7 @@ import { useContext } from "react";
 import Button from "./ui/Button";
 import { useLogout } from "@/api/auth/hooks";
 import { UserContext } from "@/context/User";
+import Logo from "../assets/Logo.svg";
 
 const Header = () => {
     const { user, token, isAuthorized } = useContext(UserContext);
@@ -15,7 +16,9 @@ const Header = () => {
     return (
         <header className="fixed inset-x-0 top-0 z-[1000] flex flex-row items-center justify-between border-b-[1px] border-[#D4D4D4] bg-background p-4 md:px-8 lg:px-12">
             <p>
-                <Link to="/">Logo</Link>
+                <Link to="/">
+                    <img src={Logo} alt="logo" />
+                </Link>
             </p>
             <nav>
                 <ul className="flex flex-row items-center gap-12">
