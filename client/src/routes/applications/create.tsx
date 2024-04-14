@@ -136,7 +136,7 @@ const Create = () => {
                                                         <SelectItem value="chernihiv">Чернігівська обл.</SelectItem>
                                                         <SelectItem value="kharkiv">Харківська обл.</SelectItem>
                                                         <SelectItem value="luhansk">Луганська обл.</SelectItem>
-                                                        <SelectItem value="uzhorod">Донецька обл.</SelectItem>
+                                                        <SelectItem value="donteska">Донецька обл.</SelectItem>
                                                         <SelectItem value="zaporizhzhia">Запорізька обл.</SelectItem>
                                                         <SelectItem value="dnipropetrovsk">
                                                             Дніпропетровська обл.
