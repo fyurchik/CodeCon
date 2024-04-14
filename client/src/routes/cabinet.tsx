@@ -101,7 +101,7 @@ const Page = () => {
                 </div>
             </section>
             {user?.role === "SimpleUser" && (
-                <section className="flex flex-col gap-6">
+                <section className="flex max-w-5xl flex-col gap-6">
                     <div className="flex items-center justify-between">
                         <h2 className="mt-6 text-2xl font-medium">Актуальні заявки:</h2>
                         <Button asChild>
