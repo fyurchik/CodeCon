@@ -28,13 +28,13 @@ export const useCreateApplication = (token: string | null) => {
 
 export const useApplications = (
     token: string | null,
-    title: string,
     urgent: "urgent" | "not_urgent" | "all",
+    title: string,
     city: string
 ) => {
     return useInfiniteQuery({
         queryKey: ["notes", token, title, city, urgent],
-        queryFn: ({ pageParam }) => getApplications(token, pageParam, title, urgent, city),
+        queryFn: ({ pageParam }) => getApplications(token, pageParam, urgent, title, city),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {
             if (allPages.length < lastPage.allpages) {

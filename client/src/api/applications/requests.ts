@@ -16,12 +16,12 @@ export const createApplication = async (token: string | null, data: AplicationSc
 export const getApplications = async (
     token: string | null,
     page: number,
-    title: string,
     urgent: "urgent" | "not_urgent" | "all",
-    city: string
+    title?: string,
+    city?: string
 ) => {
     const res = await api
-        .get(`authorize/applications/?urgent=${urgent}`, {
+        .get(`authorize/applications/?page=${page}&title=${title}&urgent=${urgent}&city=${city ?? ""}`, {
             headers: {
                 Authorization: `Token ${token}`,
             },

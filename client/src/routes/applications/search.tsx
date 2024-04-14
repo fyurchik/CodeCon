@@ -12,7 +12,7 @@ const Page = () => {
     const { token } = useContext(UserContext);
     const navigate = Route.useNavigate();
     const search = Route.useSearch();
-    const applications = useApplications(token, search.search, search.urgency, search.city);
+    const applications = useApplications(token, search.urgency, search.search, search.city);
     const { isIntersecting, ref } = useIntersection({
         threshold: 0,
     });
