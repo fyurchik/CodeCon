@@ -41,7 +41,7 @@ const Header = () => {
                         <Link
                             className="transition duration-300 hover:text-[#6B6B6B]"
                             to="/applications/search"
-                            search={{ urgency: "all", categories: ["Всі"] }}
+                            search={{ urgency: "all", categories: "all" }}
                         >
                             Пошук заявок
                         </Link>

@@ -101,7 +101,7 @@ const Page = () => {
                     <h3 className="text-[28px] font-medium">Категорії</h3>
                     <Link
                         to="/applications/search"
-                        search={(prev) => ({ ...prev, categories: ["Всі"] })}
+                        search={(prev) => ({ ...prev, categories: "all" })}
                         className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white"
                     >
                         Всі
@@ -110,7 +110,7 @@ const Page = () => {
                         <Link
                             key={tag.id}
                             to="/applications/search"
-                            search={(prev) => ({ ...prev, categories: [tag.name] })}
+                            search={(prev) => ({ ...prev, categories: tag.name })}
                             className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white"
                         >
                             {tag.name}
@@ -148,7 +148,7 @@ const Page = () => {
 const paramsSchema = zod.object({
     urgency: zod.enum(["urgent", "not_urgent", "all"]).catch("all"),
     city: zod.string().optional(),
-    categories: zod.array(zod.string()).optional().catch("Всі"),
+    categories: zod.string().catch("all"),
     search: zod.string().optional(),
 });
 
