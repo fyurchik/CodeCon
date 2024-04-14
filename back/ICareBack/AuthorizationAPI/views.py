@@ -52,8 +52,7 @@ class UserRegisterAPIView(APIView):
     def post(self, request, *args, **kargs):
         serializer = UserRegisterSerializer(data=request.data)        
         if serializer.is_valid():            
-            serializer.save()
-            #print(serializer.data)
+            serializer.save()            
             response = {
                 'success': True,
                 'user': serializer.data,
@@ -95,20 +94,41 @@ class PostViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
     
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])# urgent, city, tags 
+@permission_classes([IsAuthenticated])
 def application_list_view(request):    
-    applications = Application.objects.all()
-    allquantity = applications.count()
-    quantity = allquantity//5
+    if request.method =='GET':
+        city = request.query_params.get('city')
+        urgent = request.query_params.get('urgent')
+        tags = request.query_params.getlist('tags')        
+        title_query = request.query_params.get('title')
 
-    perpage = request.query_params.get('perpage', default = 5)
-    page = request.query_params.get('page', default=1)
-    paginator = Paginator(applications, per_page = perpage)
-    try:
-        applications = paginator.page(number=page)
-    except EmptyPage:
-        applications = []
+        applications = Application.objects.all().filter(active=True)
+        
+        if title_query:
+            applications = applications.filter(title__icontains=title_query)
 
-    serializer = PostSerializer(applications, many=True)    
+        allquantity = applications.count()
+        quantity = allquantity//5
+        if urgent != "all":         
+            applications = applications.filter(urgent=urgent)
+        if city:
+            applications = applications.filter(city=city)
+        else:
+            pass
+        if tags:
+            applications = applications.filter(tags__name__in=tags)
+
+        perpage = request.query_params.get('perpage', default = 5)
+        page = request.query_params.get('page', default=1)
+        paginator = Paginator(applications, per_page = perpage)
+        try:
+            applications = paginator.page(number=page)
+        except EmptyPage:
+            applications = []
+
+        serializer = PostSerializer(applications, many=True)    
     
-    return Response({"results":serializer.data, "allpages":quantity, "all":allquantity})
+        return Response({"results":serializer.data, "allpages":quantity, "all":allquantity})
+    return Response({"message":"Somethins goes wrong"}, status=status.HTTP_400_BAD_REQUEST)
+
+

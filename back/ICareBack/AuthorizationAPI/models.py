@@ -16,7 +16,7 @@ class Application(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
     active = models.BooleanField(default=True)
-    urgent = models.BooleanField(default=False)
+    urgent = models.CharField(max_length=15,default='all')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     age = models.IntegerField()    
     tags = models.ManyToManyField(Tag, blank=True)
