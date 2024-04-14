@@ -53,9 +53,34 @@ const Page = () => {
                             <SelectValue placeholder="Оберіть Вашу облась" />
                         </SelectTrigger>
                         <SelectContent className="z-[2000]">
-                            <SelectItem value="kyiv">Київська обл.</SelectItem>
+                            <SelectItem value="kyjivska">Київська обл.</SelectItem>
+                            <SelectItem value="kyiv">Київ</SelectItem>
                             <SelectItem value="lviv">Львівська обл.</SelectItem>
+                            <SelectItem value="zakarpattia">Закарпатська обл.</SelectItem>
                             <SelectItem value="uzhorod">Ужгородська обл.</SelectItem>
+                            <SelectItem value="volyn">Волинська обл.</SelectItem>
+                            <SelectItem value="rivne">Рівненська обл.</SelectItem>
+                            <SelectItem value="sumy">Сумська обл.</SelectItem>
+                            <SelectItem value="ivano_frankivsk">Івано-Франківська обл.</SelectItem>
+                            <SelectItem value="ternopil">Тернопільска обл.</SelectItem>
+                            <SelectItem value="chernivtsi">Чернівецька обл.</SelectItem>
+                            <SelectItem value="vinnytsia">Вінницька обл.</SelectItem>
+                            <SelectItem value="khmelnytskyi">Хмельницька обл.</SelectItem>
+                            <SelectItem value="zhytomyr">Житомирська обл.</SelectItem>
+                            <SelectItem value="chernihiv">Чернігівська обл.</SelectItem>
+                            <SelectItem value="kharkiv">Харківська обл.</SelectItem>
+                            <SelectItem value="luhansk">Луганська обл.</SelectItem>
+                            <SelectItem value="uzhorod">Донецька обл.</SelectItem>
+                            <SelectItem value="zaporizhzhia">Запорізька обл.</SelectItem>
+                            <SelectItem value="dnipropetrovsk">Дніпропетровська обл.</SelectItem>
+                            <SelectItem value="kirovohrad">Кіровоградська обл.</SelectItem>
+                            <SelectItem value="cherkasy">Черкаська обл.</SelectItem>
+                            <SelectItem value="poltava">Полтавська обл.</SelectItem>
+                            <SelectItem value="kherson">Херсонська обл.</SelectItem>
+                            <SelectItem value="mykolaiv">Миколаївська обл.</SelectItem>
+                            <SelectItem value="odesa">Одеська обл.</SelectItem>
+                            <SelectItem value="crimea">Автономна республіка Крим</SelectItem>
+                            <SelectItem value="sevastopol">Севастополь</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
