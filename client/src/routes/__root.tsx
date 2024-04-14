@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Link, Outlet, ScrollRestoration } from "@tanstack/react-router";
 import Header from "@/components/Header";
 import Toaster from "@/ui/Toast";
 
@@ -11,6 +11,7 @@ const Page = () => {
                     relative mt-[68px] min-h-[calc(100vh_-_68px)] w-full grow bg-background py-4 text-foreground
                 `}
             >
+                <ScrollRestoration />
                 <Outlet />
                 <Toaster />
             </main>
