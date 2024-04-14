@@ -156,7 +156,7 @@ const Page = () => {
                             <Link to="/applications/create">Створити заявку</Link>
                         </Button>
                     </div>
-                    {applications.data?.results.length < 1 ? (
+                    {applications.data?.results && applications.data?.results.length < 1 ? (
                         <>
                             <img className="h-[293px] w-[293px] self-center" src={VectorImg} alt="noMessagesIcon" />
                             <p className="text-center">Тут поки порожньо...</p>
