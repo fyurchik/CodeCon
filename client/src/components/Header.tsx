@@ -47,11 +47,6 @@ const Header = () => {
                             Кабінет
                         </Link>
                     )}
-                    {isAuthorized && (
-                        <Button onClick={onSubmit} size="sm" loading={logoutHandler.isPending}>
-                            Вийти
-                        </Button>
-                    )}
                     {isAuthorized ? (
                         user?.role === "SimpleUser" && (
                             <Button size="sm" asChild>
@@ -67,6 +62,11 @@ const Header = () => {
                                 <Link to="/auth/register">Зареєструватись</Link>
                             </Button>
                         </div>
+                    )}
+                    {isAuthorized && (
+                        <Button onClick={onSubmit} size="sm" loading={logoutHandler.isPending}>
+                            Вийти
+                        </Button>
                     )}
                 </ul>
             </nav>
