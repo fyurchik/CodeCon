@@ -1,18 +1,14 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { useContext } from "react";
 import Header from "@/components/Header";
-import { ThemeContext } from "@/context/Theme";
 import Toaster from "@/ui/Toast";
 
 const Page = () => {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <>
             <Header />
             <main
                 className={`
-                    ${theme === "dark" ? "dark" : ""} relative mt-[68px] min-h-[calc(100vh_-_68px)] w-full grow bg-background py-4 text-foreground
+                    relative mt-[68px] min-h-[calc(100vh_-_68px)] w-full grow bg-background py-4 text-foreground
                 `}
             >
                 <Outlet />
