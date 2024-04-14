@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import { useLogin } from "@/api/auth/hooks";
 import { loginSchema, LoginSchema } from "@/types/auth";
 import Button from "@/ui/Button";
-import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
+import { Card, CardHeader, CardContent } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
 import { useEffect } from "react";
+import Logo from "../../assets/Logo.svg";
 
 const Page = () => {
     const formLogin = useForm<LoginSchema>({
@@ -31,7 +32,9 @@ const Page = () => {
     return (
         <Card className="mx-auto w-full max-w-md rounded-3xl md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <CardHeader>
-                <CardTitle className="mb-20 text-center text-2xl">logo</CardTitle>
+                <Link to="/" className="mb-20 self-center">
+                    <img src={Logo} alt="logo" />
+                </Link>
             </CardHeader>
             <CardContent>
                 <Form {...formLogin}>
