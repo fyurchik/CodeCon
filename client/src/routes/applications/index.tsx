@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CardContent, CardTitle, CardDescription } from "@/ui/Card";
-import Input from "@/ui/Input";
+import { CardContent, CardTitle } from "@/ui/Card";
 
 const Create = () => {
     return (

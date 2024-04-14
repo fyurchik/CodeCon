@@ -8,5 +8,7 @@ urlpatterns = [
     path('logout/', UserLogoutAPIView.as_view(), name='logout'),
     path('getuserdata/', views.getdata, name='userinfo'),
     path('makepost/', PostViewSet.as_view({'get': 'list','post': 'create'}), name='makepost'),
-    path('makepost/<int:pk>', PostViewSet.as_view({'get': 'retrieve','delete':'destroy'})),
+    path('makepost/<int:pk>', PostViewSet.as_view({'get': 'retrieve','delete':'destroy'})),    
+    path('applications/', views.application_list_view, name='application-list'),
+    path('applications/<int:pk>', views.application_list_view),
 ]

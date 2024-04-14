@@ -70,4 +70,4 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = '__all__'
-        
+

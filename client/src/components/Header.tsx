@@ -40,7 +40,7 @@ const Header = () => {
                         </Button>
                     )}
                     {isAuthorized ? (
-                        user?.role === "in_need" && (
+                        user?.role === "SimpleUser" && (
                             <Button size="sm" asChild>
                                 <Link to="/applications/create">Створити заявку</Link>
                             </Button>
