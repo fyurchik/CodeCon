@@ -26,7 +26,7 @@ const Page = () => {
     };
 
     useEffect(() => {
-        document.querySelector("header")?.remove();
+        document.querySelector("header").style.display = "none";
     }, []);
 
     return (

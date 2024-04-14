@@ -45,6 +45,7 @@ export const useLogin = () => {
             setToken(data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
             localStorage.setItem("token", JSON.stringify(data.token));
+            document.querySelector("header").style.display = "flex";
             void navigate({ to: "/cabinet" });
         },
     });

@@ -32,7 +32,7 @@ const Page = () => {
     };
 
     useEffect(() => {
-        document.querySelector("header")?.remove();
+        document.querySelector("header").style.display = "none";
     }, []);
     return (
         <Card className="mx-auto w-full max-w-md md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
@@ -132,7 +132,7 @@ const Page = () => {
                                                 </FormItem>
                                                 <FormItem className="mb-5 flex items-center space-x-3 space-y-0 pl-5">
                                                     <FormControl>
-                                                        <RadioGroupItem value="volunteer" />
+                                                        <RadioGroupItem value="volonteer" />
                                                     </FormControl>
                                                     <FormLabel className=" font-normal ">може допомогти</FormLabel>
                                                 </FormItem>
