@@ -28,6 +28,7 @@ export const variants = cva(
                 default: "h-10 px-4 py-2 rounded-full",
                 sm: "h-9 rounded-full px-3",
                 lg: "h-11 rounded-full px-8",
+                xl: "h-20 rounded-full px-10 text-2xl",
                 link: "h-auto p-0 underline",
                 icon: "size-10",
                 floating: "fixed bottom-5 right-6 z-50 size-14 rounded-full sm:bottom-7 sm:right-10 lg:right-[80px]",
