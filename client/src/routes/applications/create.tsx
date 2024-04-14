@@ -15,6 +15,7 @@ import { Textarea } from "@/ui/Textarea";
 import Badge from "@/ui/Badge";
 
 const Create = () => {
+    const navigate = Route.useNavigate();
     const { token, user } = useContext(UserContext);
     const form = useForm<AplicationSchema>({
         resolver: zodResolver(aplicationSchema),
@@ -35,6 +36,7 @@ const Create = () => {
     const onSubmit = async (values: AplicationSchema) => {
         // @ts-expect-error too lazy to add types
         await createApplicationHandler.mutateAsync({ ...values, urgent: values.urgent, user: user.id });
+        void navigate({ to: "/cabinet" });
     };
 
     return (

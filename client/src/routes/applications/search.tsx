@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useContext, useEffect } from "react";
 import { z as zod } from "zod";
-import { useApplications } from "@/api/applications/hooks";
+import { useApplications, useTags } from "@/api/applications/hooks";
 import { UserContext } from "@/context/User";
 import { useIntersection } from "@/hooks/useIntersection";
 import ApplicationCard from "@/ui/ApplicationCard";
@@ -12,7 +12,8 @@ const Page = () => {
     const { token } = useContext(UserContext);
     const navigate = Route.useNavigate();
     const search = Route.useSearch();
-    const applications = useApplications(token, search.urgency, search.search, search.city);
+    const applications = useApplications(token, search.urgency, search.search, search.city, search.categories);
+    const tags = useTags();
     const { isIntersecting, ref } = useIntersection({
         threshold: 0,
     });
@@ -24,23 +25,35 @@ const Page = () => {
     }, [isIntersecting, applications]);
     return (
         <section>
-            <aside className="fixed left-0 top-0 z-[999] flex h-screen w-72 flex-col gap-4 bg-card pl-8 pt-24">
+            <aside className="fixed left-0 top-0 z-[999] flex h-screen flex-col gap-4 overflow-auto border-r-[1px] border-[#D4D4D4] pl-8 pr-[50px] pt-24">
                 <div className="flex flex-col gap-2">
-                    <h3 className="font-medium">Фільтри пошуку</h3>
+                    <h3 className="text-[28px] font-medium">Фільтри пошуку</h3>
                     <div className="flex flex-col gap-1">
-                        <Link to="/applications/search" search={(prev) => ({ ...prev, urgency: "all" })}>
+                        <Link
+                            to="/applications/search"
+                            search={(prev) => ({ ...prev, urgency: "all" })}
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                        >
                             Всі
                         </Link>
-                        <Link to="/applications/search" search={(prev) => ({ ...prev, urgency: "urgent" })}>
+                        <Link
+                            to="/applications/search"
+                            search={(prev) => ({ ...prev, urgency: "urgent" })}
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                        >
                             Термінові
                         </Link>
-                        <Link to="/applications/search" search={(prev) => ({ ...prev, urgency: "not_urgent" })}>
+                        <Link
+                            to="/applications/search"
+                            search={(prev) => ({ ...prev, urgency: "not_urgent" })}
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                        >
                             Не термінові
                         </Link>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
-                    <h3 className="font-medium">Місто</h3>
+                    <h3 className="text-[28px] font-medium">Місто</h3>
                     <Select
                         onValueChange={(e) =>
                             navigate({
@@ -49,7 +62,7 @@ const Page = () => {
                             })
                         }
                     >
-                        <SelectTrigger className="mt-3 placeholder:opacity-40">
+                        <SelectTrigger className="file:border-1 mt-3 flex h-16 w-full gap-2.5 rounded-full border border-[#D4D4D4] border-border bg-[#F5F5F5] bg-background p-7 px-3 py-2 text-sm ring-offset-background transition file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground placeholder:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-foreground focus-visible:ring-offset-0 disabled:cursor-not-allowed">
                             <SelectValue placeholder="Оберіть Вашу облась" />
                         </SelectTrigger>
                         <SelectContent className="z-[2000]">
@@ -85,10 +98,20 @@ const Page = () => {
                     </Select>
                 </div>
                 <div className="flex flex-col gap-4">
-                    <h3 className="font-medium">Категорії</h3>
+                    <h3 className="text-[28px] font-medium">Категорії</h3>
+                    {tags.data?.tags.map((tag) => (
+                        <Link
+                            key={tag.id}
+                            to="/applications/search"
+                            search={(prev) => ({ ...prev, categories: [tag.name] })}
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                        >
+                            {tag.name}
+                        </Link>
+                    ))}
                 </div>
             </aside>
-            <section className="ml-56">
+            <section className="ml-96 mr-12">
                 <div className="mt-4 flex flex-col gap-8">
                     <h1 className="text-4xl">Актуальні заявки про допомогу:</h1>
                     <Input

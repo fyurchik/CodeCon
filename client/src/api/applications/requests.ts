@@ -18,14 +18,18 @@ export const getApplications = async (
     page: number,
     urgent: "urgent" | "not_urgent" | "all",
     title?: string,
-    city?: string
+    city?: string,
+    tag?: string
 ) => {
     const res = await api
-        .get(`authorize/applications/?page=${page}&title=${title ?? ""}&urgent=${urgent}&city=${city ?? ""}`, {
-            headers: {
-                Authorization: `Token ${token}`,
-            },
-        })
+        .get(
+            `authorize/applications/?page=${page}&title=${title ?? ""}&urgent=${urgent}&city=${city ?? ""}&tags=${tag ?? ""}`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            }
+        )
         .json<{
             count: number;
             allpages: number;
@@ -79,5 +83,10 @@ export const deleteApplication = async (token: string | null, id: number) => {
             },
         })
         .json();
+    return res;
+};
+
+export const getTags = async () => {
+    const res = await api.get("authorize/applications/tags").json<{ tags: { id: number; name: string }[] }>();
     return res;
 };

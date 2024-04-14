@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
 import { useContext } from "react";
 import { toast } from "sonner";
-import { createApplication, deleteApplication, getApplications, getMyApplications } from "./requests";
+import { createApplication, deleteApplication, getApplications, getMyApplications, getTags } from "./requests";
 import { UserContext } from "@/context/User";
 import { AplicationSchema } from "@/types/aplication";
 
@@ -30,11 +30,12 @@ export const useApplications = (
     token: string | null,
     urgent: "urgent" | "not_urgent" | "all",
     title: string,
-    city: string
+    city: string,
+    tag: string
 ) => {
     return useInfiniteQuery({
-        queryKey: ["notes", token, title, city, urgent],
-        queryFn: ({ pageParam }) => getApplications(token, pageParam, urgent, title, city),
+        queryKey: ["notes", token, title, city, urgent, tag],
+        queryFn: ({ pageParam }) => getApplications(token, pageParam, urgent, title, city, tag),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {
             if (allPages.length < lastPage.allpages) {
@@ -68,5 +69,12 @@ export const useDeleteApplication = (token: string | null) => {
             void QueryClient.invalidateQueries({ queryKey: ["myApplications"] });
             toast.success("Запит успішно видалено!");
         },
+    });
+};
+
+export const useTags = () => {
+    return useQuery({
+        queryKey: ["tags"],
+        queryFn: async () => getTags(),
     });
 };
