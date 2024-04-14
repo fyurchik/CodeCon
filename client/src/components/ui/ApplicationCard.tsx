@@ -26,7 +26,7 @@ interface Props {
         phone_number: string;
         tags: number[];
         title: string;
-        urgent: boolean;
+        urgent: "urgent" | "not_urgent";
         user: number;
     };
 }
@@ -36,7 +36,7 @@ const ApplicationCard = ({ application: { tags, title, active, age, city, conten
     return (
         <Card>
             <CardHeader>
-                {urgent && <Badge variant="destructive">Терміново</Badge>}
+                {urgent === "urgent" && <Badge variant="destructive">Терміново</Badge>}
                 <CardTitle className="line-clamp-2">{title}</CardTitle>
             </CardHeader>
             <CardContent>

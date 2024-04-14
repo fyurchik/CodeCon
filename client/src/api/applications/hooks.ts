@@ -26,10 +26,15 @@ export const useCreateApplication = (token: string | null) => {
     });
 };
 
-export const useApplications = (token: string | null) => {
+export const useApplications = (
+    token: string | null,
+    title: string,
+    urgent: "urgent" | "not_urgent" | "all",
+    city: string
+) => {
     return useInfiniteQuery({
-        queryKey: ["notes", token],
-        queryFn: ({ pageParam }) => getApplications(token, pageParam),
+        queryKey: ["notes", token, title, city, urgent],
+        queryFn: ({ pageParam }) => getApplications(token, pageParam, title, urgent, city),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {
             if (allPages.length < lastPage.allpages) {

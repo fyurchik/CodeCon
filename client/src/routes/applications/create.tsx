@@ -12,7 +12,6 @@ import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/Select";
 import { Textarea } from "@/ui/Textarea";
-import { Checkbox } from "@/ui/Сheckbox";
 
 const Create = () => {
     const { token, user } = useContext(UserContext);
@@ -34,7 +33,7 @@ const Create = () => {
 
     const onSubmit = async (values: AplicationSchema) => {
         // @ts-expect-error too lazy to add types
-        await createApplicationHandler.mutateAsync({ ...values, urgent: values.urgent === "urgent", user: user.id });
+        await createApplicationHandler.mutateAsync({ ...values, urgent: values.urgent, user: user.id });
     };
 
     return (

@@ -12,14 +12,13 @@ const Page = () => {
     const { token } = useContext(UserContext);
     const navigate = Route.useNavigate();
     const search = Route.useSearch();
-    const applications = useApplications(token);
+    const applications = useApplications(token, search.search, search.urgency, search.city);
     const { isIntersecting, ref } = useIntersection({
         threshold: 0,
     });
 
     useEffect(() => {
         if (isIntersecting && applications.hasNextPage) {
-            console.log("LOL");
             void applications.fetchNextPage();
         }
     }, [isIntersecting, applications]);
