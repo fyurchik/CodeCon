@@ -123,7 +123,7 @@ const Page = () => {
                                         >
                                             <FormItem className=" ">
                                                 <FormControl>
-                                                    <RadioGroupItem value="volonteer" className="peer hidden" />
+                                                    <RadioGroupItem value="in_need" className="peer hidden" />
                                                 </FormControl>
                                                 <FormLabel className="peer- flex h-16 w-full items-center  space-y-0  rounded-bl-full rounded-tl-full px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
                                                     потребує допомоги
@@ -131,7 +131,7 @@ const Page = () => {
                                             </FormItem>
                                             <FormItem className="">
                                                 <FormControl>
-                                                    <RadioGroupItem value="in_need" className="peer hidden" />
+                                                    <RadioGroupItem value="volonteer" className="peer hidden" />
                                                 </FormControl>
                                                 <FormLabel className="flex h-16 w-full items-center space-y-0  rounded-br-full rounded-tr-full px-10 text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
                                                     може допомогти

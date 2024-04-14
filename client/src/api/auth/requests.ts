@@ -51,3 +51,15 @@ export const getUserData = async (token: string | null) => {
         .json<{ user: User; token: string }>();
     return res;
 };
+
+export const updateUserData = async (token: string | null, data: { first_name: string; last_name: string }) => {
+    const res = await api
+        .put("authorize/getuserdata/", {
+            json: data,
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .json<{ user: User; token: string }>();
+    return res;
+};

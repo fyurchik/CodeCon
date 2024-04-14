@@ -13,6 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import VectorImg from "../assets/Vector.svg";
 import PenImg from "../assets/pen.svg";
 import Input from "@/ui/Input";
+import { useUpdateUserData } from "@/api/auth/hooks";
 
 const Page = () => {
     const { user, token } = useContext(UserContext);
@@ -26,10 +27,10 @@ const Page = () => {
     });
 
     const applications = useMyApplications(token);
+    const updateUserDataHandler = useUpdateUserData();
 
-    const onSubmit = (values: BaseUserSchema) => {
-        console.log(values);
-        // signUpHandler.mutate({ email: values.email, password: values.password });
+    const onSubmit = async (values: BaseUserSchema) => {
+        await updateUserDataHandler.mutateAsync({ first_name: values.firstName, last_name: values.lastName });
     };
 
     return (

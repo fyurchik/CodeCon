@@ -1,9 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
 import { useContext } from "react";
 import { toast } from "sonner";
-import { getUserData, login, logout, register } from "./requests";
+import { getUserData, login, logout, register, updateUserData } from "./requests";
 import { UserContext } from "@/context/User";
 import { LoginSchema, RegisterSchema } from "@/types/auth";
 
@@ -13,8 +13,8 @@ export const useRegister = () => {
         mutationFn: (input: RegisterSchema) => register(input),
         onError: async (err) => {
             if (err instanceof HTTPError) {
-                const error = (await err.response.json()) as { message: string };
-                toast.error(error.message);
+                const error = (await err.response.json()) as { username: { detail: string } };
+                toast.error(error.username.detail);
                 return;
             }
             toast.error("Не вдалося створити акаунт!");
@@ -33,8 +33,8 @@ export const useLogin = () => {
         mutationFn: (input: LoginSchema) => login(input),
         onError: async (err) => {
             if (err instanceof HTTPError) {
-                const error = (await err.response.json()) as { message: string };
-                toast.error(error.message);
+                const error = (await err.response.json()) as { username: { detail: string } };
+                toast.error(error.username.detail);
                 return;
             }
             toast.error("Не вдалося увійти в акаунт!");
@@ -78,7 +78,6 @@ export const useLogout = () => {
 };
 
 export const useUserData = (token: string | null) => {
-    console.log(token);
     return useQuery({
         queryKey: ["user", token],
         queryFn: () => getUserData(token),
@@ -88,5 +87,26 @@ export const useUserData = (token: string | null) => {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
         refetchOnReconnect: false,
+    });
+};
+
+export const useUpdateUserData = () => {
+    const { token } = useContext(UserContext);
+    const QueryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (data: { first_name: string; last_name: string }) =>
+            updateUserData(token, { first_name: data.first_name, last_name: data.lastName }),
+        onError: async (err) => {
+            if (err instanceof HTTPError) {
+                const error = (await err.response.json()) as { detail: string };
+                toast.error(error.detail);
+                return;
+            }
+            toast.error("Не вдалося оновити дані!");
+        },
+        onSuccess: async () => {
+            toast.success("Дані успішно оновлено!");
+            void QueryClient.invalidateQueries({ queryKey: ["user", token] });
+        },
     });
 };
