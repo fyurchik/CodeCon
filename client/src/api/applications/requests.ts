@@ -21,7 +21,7 @@ export const getApplications = async (
     city?: string
 ) => {
     const res = await api
-        .get(`authorize/applications/?page=${page}&title=${title}&urgent=${urgent}&city=${city ?? ""}`, {
+        .get(`authorize/applications/?page=${page}&title=${title ?? ""}&urgent=${urgent}&city=${city ?? ""}`, {
             headers: {
                 Authorization: `Token ${token}`,
             },
