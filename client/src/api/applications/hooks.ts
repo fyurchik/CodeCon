@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { HTTPError } from "ky";
 import { useContext } from "react";
 import { toast } from "sonner";
-import { createApplication, getApplications, getMyApplications } from "./requests";
+import { createApplication, deleteApplication, getApplications, getMyApplications } from "./requests";
 import { UserContext } from "@/context/User";
 import { AplicationSchema } from "@/types/aplication";
 
@@ -49,5 +49,24 @@ export const useMyApplications = (token: string | null) => {
     return useQuery({
         queryKey: ["myApplications", token],
         queryFn: () => getMyApplications(token),
+    });
+};
+
+export const useDeleteApplication = (token: string | null) => {
+    const QueryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (id: number) => deleteApplication(token, id),
+        onError: async (err) => {
+            if (err instanceof HTTPError) {
+                const error = (await err.response.json()) as { detail: string };
+                toast.error(error.detail);
+                return;
+            }
+            toast.error("Не вдалося видалити запит!");
+        },
+        onSuccess: async () => {
+            void QueryClient.invalidateQueries({ queryKey: ["myApplications"] });
+            toast.success("Запит успішно видалено!");
+        },
     });
 };

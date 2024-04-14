@@ -70,3 +70,14 @@ export const getMyApplications = async (token: string | null) => {
         }>();
     return res;
 };
+
+export const deleteApplication = async (token: string | null, id: number) => {
+    const res = await api
+        .delete(`authorize/applications/my/${id}`, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .json();
+    return res;
+};

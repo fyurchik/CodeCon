@@ -3,10 +3,12 @@ import { Link } from "@tanstack/react-router";
 import { useContext } from "react";
 import Badge from "./Badge";
 import Button from "./Button";
+import { useDeleteApplication } from "@/api/applications/hooks";
 import { UserContext } from "@/context/User";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import {
     AlertDialog,
+    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
@@ -31,8 +33,15 @@ interface Props {
     };
 }
 
-const ApplicationCard = ({ application: { tags, title, active, age, city, content, urgent, user: userId } }: Props) => {
-    const { user } = useContext(UserContext);
+const ApplicationCard = ({
+    application: { tags, title, active, age, id, city, content, urgent, user: userId },
+}: Props) => {
+    const { user, token } = useContext(UserContext);
+    const deleteApplicationHandler = useDeleteApplication(token);
+
+    const onSubmit = () => {
+        deleteApplicationHandler.mutate(id);
+    };
     return (
         <Card>
             <CardHeader>
@@ -67,9 +76,9 @@ const ApplicationCard = ({ application: { tags, title, active, age, city, conten
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel>Скасувати</AlertDialogCancel>
-                                    <Button type="button" variant="destructive">
+                                    <AlertDialogAction variant="destructive" onClick={onSubmit}>
                                         Видалити
-                                    </Button>
+                                    </AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
