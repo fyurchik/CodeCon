@@ -8,6 +8,7 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
 import { RadioGroup, RadioGroupItem } from "@/ui/Radio";
+import { useEffect } from "react";
 
 const Page = () => {
     const form = useForm<RegisterSchema>({
@@ -29,10 +30,14 @@ const Page = () => {
         form.reset();
     };
 
+    useEffect(() => {
+        document.querySelector("header")?.remove();
+    }, []);
+
     return (
         <Card className="mx-auto w-full max-w-md md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <CardHeader>
-                <CardTitle className="text-2xl">Реєстрація</CardTitle>
+                <CardTitle className="mb-20 text-center text-2xl">Реєстрація</CardTitle>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
@@ -43,9 +48,8 @@ const Page = () => {
                                 name="firstName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Ім&apos;я</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Петро" {...field} />
+                                            <Input placeholder="Ім'я" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -56,9 +60,8 @@ const Page = () => {
                                 name="lastName"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Прізвище</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Петренко" {...field} />
+                                            <Input placeholder="Прізвище" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -70,9 +73,8 @@ const Page = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Електронна пошта</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="mail@example.com" {...field} />
+                                        <Input placeholder="Електронна пошта" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -83,9 +85,8 @@ const Page = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Пароль</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" />
+                                        <Input {...field} type="password" placeholder="Пароль" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -96,9 +97,13 @@ const Page = () => {
                             name="confirmPassword"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Підтвердити пароль</FormLabel>
                                     <FormControl>
-                                        <Input {...field} type="password" />
+                                        <Input
+                                            {...field}
+                                            type="password"
+                                            placeholder="Підтвердити пароль"
+                                            className="mb-10"
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -108,25 +113,29 @@ const Page = () => {
                             control={form.control}
                             name="role"
                             render={({ field }) => (
-                                <FormItem className="space-y-3">
-                                    <FormLabel>Ти хто?</FormLabel>
+                                <FormItem className="mb-4 space-y-3">
+                                    <FormLabel className="mb-7 block font-normal">Ти людина, що потребує...</FormLabel>
                                     <FormControl>
                                         <RadioGroup
                                             onValueChange={field.onChange}
                                             defaultValue={field.value}
-                                            className="flex flex-col space-y-1"
+                                            className="flex flex-row justify-between"
                                         >
-                                            <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormItem className=" ">
                                                 <FormControl>
-                                                    <RadioGroupItem value="volonteer" />
+                                                    <RadioGroupItem value="volonteer" className="peer hidden" />
                                                 </FormControl>
-                                                <FormLabel className="font-normal">Я можу допомогти</FormLabel>
+                                                <FormLabel className="peer- flex h-16 w-full items-center  space-y-0  rounded-bl-full rounded-tl-full px-10  text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
+                                                    потребує допомоги
+                                                </FormLabel>
                                             </FormItem>
-                                            <FormItem className="flex items-center space-x-3 space-y-0">
+                                            <FormItem className="">
                                                 <FormControl>
-                                                    <RadioGroupItem value="in_need" />
+                                                    <RadioGroupItem value="in_need" className="peer hidden" />
                                                 </FormControl>
-                                                <FormLabel className="font-normal">Я потребую допомоги</FormLabel>
+                                                <FormLabel className="flex h-16 w-full items-center space-y-0  rounded-br-full rounded-tr-full px-10 text-center font-normal peer-data-[state=checked]:bg-[#158F0A33]">
+                                                    може допомогти
+                                                </FormLabel>
                                             </FormItem>
                                         </RadioGroup>
                                     </FormControl>
@@ -135,17 +144,17 @@ const Page = () => {
                             )}
                         />
 
-                        <Button type="submit" loading={form.formState.isSubmitting}>
+                        <Button type="submit" size="lg" className="mb-8 h-16" loading={form.formState.isSubmitting}>
                             Зареєструватись
                         </Button>
                     </form>
                 </Form>
-                <p className="mt-4 text-center text-sm">
-                    Вже є акаунт?{" "}
-                    <Link to="/auth/login" className="underline">
+                <div className=" flex flex-row items-center justify-between px-24">
+                    <p className="text-center text-sm">Вже є акаунт?</p>
+                    <Link to="/auth/login" className="underline transition duration-300 hover:text-[#6B6B6B]">
                         Увійти
                     </Link>
-                </p>
+                </div>
             </CardContent>
         </Card>
     );

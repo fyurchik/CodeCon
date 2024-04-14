@@ -7,6 +7,7 @@ import Button from "@/ui/Button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/ui/Card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/ui/Form";
 import Input from "@/ui/Input";
+import { useEffect } from "react";
 
 const Page = () => {
     const formLogin = useForm<LoginSchema>({
@@ -22,6 +23,10 @@ const Page = () => {
     const onSubmit = async (values: LoginSchema) => {
         await loginHandler.mutateAsync(values);
     };
+
+    useEffect(() => {
+        document.querySelector("header")?.remove();
+    }, []);
 
     return (
         <Card className="mx-auto w-full max-w-md rounded-3xl md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
@@ -58,7 +63,7 @@ const Page = () => {
                         <Button
                             type="submit"
                             size="lg"
-                            className="mb-8 mt-8 h-16"
+                            className="mb-6 mt-6 h-16"
                             loading={formLogin.formState.isSubmitting}
                         >
                             Увійти
