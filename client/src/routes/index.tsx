@@ -2,6 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import Button from "../components/ui/Button";
 import Img from "../assets/1.webp";
 import cardsImgs from "../assets/war clues.webp";
+import handsImg from "../assets/set-raised-hands-isolated-white-removebg 1.webp";
+import registerIcon from "../assets/register.svg";
+import roleIcon from "../assets/role.svg";
+import addIcon from "../assets/add.svg";
+import doneIcon from "../assets/done.svg";
 
 const Page = () => {
     return (
@@ -32,13 +37,13 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-[65px]">
+            <div className="mt-[120px]">
                 <img src={Img} alt="Volonteer" className="rounded-3xl" />
             </div>
-            <div className="mt-[65px] grid grid-cols-2 gap-[80px]">
+            <div className="mt-[180px] grid grid-cols-2 gap-[80px]">
                 <img src={cardsImgs} alt="Clues of war" />
                 <div>
-                    <h2 className="text-[64px] font-medium">
+                    <h2 className="text-[64px] font-medium leading-none">
                         Людське життя та
                         <br /> свобода — це найвищі цінності!
                     </h2>
@@ -58,6 +63,66 @@ const Page = () => {
                             <Link to="/auth/register">Потребую допомоги</Link>
                         </Button>
                     </div>
+                </div>
+            </div>
+            <div className="mt-[80px] flex flex-col items-center">
+                <h2 className="w-[24ch] text-center text-[64px] font-medium leading-none">
+                    І саме для вирішення цих проблем ми створили наш сервіс ICare
+                </h2>
+                <div className="flex w-[70ch] items-end">
+                    <p className="mt-[60px] w-[33ch] text-[24px] font-medium">
+                        де кожен, хто потребує
+                        <br /> може попросити про
+                        <br /> допомогу,
+                    </p>
+                    <p className="mt-[60px] w-[33ch] text-right text-[24px] font-medium text-primary">
+                        і кожен, хто має
+                        <br /> можливість - допомогти
+                    </p>
+                </div>
+                <img src={handsImg} alt="Risen hands" className="mt-[36px]" />
+            </div>
+            <div className="rounded-3xl bg-card p-[90px]">
+                <h2 className="w-[24ch] text-[64px] font-medium leading-none">
+                    Як ним користуватись?
+                    <br /> Все дуже просто:
+                </h2>
+                <div className="mt-[80px] flex gap-[30px]">
+                    <div className="flex min-w-[310px] flex-col items-center gap-[68px] rounded-3xl bg-[#f5f5f5] px-[40px] py-[60px]">
+                        <img src={registerIcon} alt="Register" />
+                        <p className="text-center text-[22px]">
+                            Зареєструйтесь на сайті ввівши ім’я та електронну пошту
+                        </p>
+                    </div>
+                    <div className="flex min-w-[310px] flex-col items-center gap-[68px] rounded-3xl bg-[#f5f5f5] px-[40px] py-[60px]">
+                        <img src={roleIcon} alt="Register" />
+                        <p className="text-center text-[22px]">
+                            Оберіть свою роль: ви потребує допомоги чи можете її надати
+                        </p>
+                    </div>
+                    <div className="flex min-w-[310px] flex-col items-center gap-[68px] rounded-3xl bg-[#f5f5f5] px-[40px] py-[60px]">
+                        <img src={addIcon} alt="Register" />
+                        <p className="text-center text-[22px]">
+                            Якщо вам потрібна допомога - створіть заявку де ви опишете свою проблему і люди зможуть на
+                            неї відкликнутись
+                        </p>
+                    </div>
+                    <div className="flex min-w-[310px] flex-col items-center gap-[68px] rounded-3xl bg-[#f5f5f5] px-[40px] py-[60px]">
+                        <img src={doneIcon} alt="Register" />
+                        <p className="text-center text-[22px]">
+                            Якщо ви хочете допомогти - перегляньте перелік актуальних заявок про допомогу і зверніться
+                            по вказаних контактах
+                        </p>
+                    </div>
+                </div>
+
+                <div className="mt-[80px] flex w-full gap-[20px]">
+                    <Button asChild size="xl" className="grow">
+                        <Link to="/auth/register">Зареєструватись</Link>
+                    </Button>
+                    <Button asChild variant="secondary" size="xl" className="grow">
+                        <Link to="/auth/login">Увійти</Link>
+                    </Button>
                 </div>
             </div>
         </section>
