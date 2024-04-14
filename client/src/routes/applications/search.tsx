@@ -32,21 +32,21 @@ const Page = () => {
                         <Link
                             to="/applications/search"
                             search={(prev) => ({ ...prev, urgency: "all" })}
-                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white "
                         >
                             Всі
                         </Link>
                         <Link
                             to="/applications/search"
                             search={(prev) => ({ ...prev, urgency: "urgent" })}
-                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white"
                         >
                             Термінові
                         </Link>
                         <Link
                             to="/applications/search"
                             search={(prev) => ({ ...prev, urgency: "not_urgent" })}
-                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white"
                         >
                             Не термінові
                         </Link>
@@ -99,12 +99,19 @@ const Page = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <h3 className="text-[28px] font-medium">Категорії</h3>
+                    <Link
+                        to="/applications/search"
+                        search={(prev) => ({ ...prev, categories: ["Всі"] })}
+                        className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white"
+                    >
+                        Всі
+                    </Link>
                     {tags.data?.tags.map((tag) => (
                         <Link
                             key={tag.id}
                             to="/applications/search"
                             search={(prev) => ({ ...prev, categories: [tag.name] })}
-                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] "
+                            className="inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap rounded-3xl bg-secondary px-4 py-4 font-medium text-secondary-foreground shadow-sm ring-secondary-foreground ring-offset-background transition duration-500 hover:bg-[#E9EEE8] [&.active]:bg-primary [&.active]:text-white"
                         >
                             {tag.name}
                         </Link>
@@ -141,7 +148,7 @@ const Page = () => {
 const paramsSchema = zod.object({
     urgency: zod.enum(["urgent", "not_urgent", "all"]).catch("all"),
     city: zod.string().optional(),
-    categories: zod.array(zod.string()).optional(),
+    categories: zod.array(zod.string()).optional().catch("Всі"),
     search: zod.string().optional(),
 });
 

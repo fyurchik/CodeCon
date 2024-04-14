@@ -38,7 +38,11 @@ const Header = () => {
                         </Link>
                     </li>
                     {isAuthorized && (
-                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/applications/search">
+                        <Link
+                            className="transition duration-300 hover:text-[#6B6B6B]"
+                            to="/applications/search"
+                            search={{ urgency: "all", categories: ["Всі"] }}
+                        >
                             Пошук заявок
                         </Link>
                     )}
