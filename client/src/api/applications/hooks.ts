@@ -32,7 +32,7 @@ export const useApplications = (token: string | null) => {
         queryFn: ({ pageParam }) => getApplications(token, pageParam),
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => {
-            if (allPages.length < lastPage.pages) {
+            if (allPages.length < lastPage.allpages) {
                 return allPages.length + 1;
             }
             return null;

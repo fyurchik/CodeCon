@@ -15,14 +15,14 @@ export const createApplication = async (token: string | null, data: AplicationSc
 
 export const getApplications = async (token: string | null, page: number) => {
     const res = await api
-        .get("authorize/applications/", {
+        .get(`authorize/applications/?page=${page}`, {
             headers: {
                 Authorization: `Token ${token}`,
             },
         })
         .json<{
             count: number;
-            pages: number;
+            allpages: number;
             results: {
                 active: boolean;
                 age: number;
