@@ -23,17 +23,17 @@ const Header = () => {
             <nav>
                 <ul className="flex flex-row items-center gap-12">
                     <li>
-                        <Link className="transition duration-300 hover:text-[#6B6B6B] " to="/">
+                        <Link className="transition duration-300 hover:text-[#6B6B6B] " to="/" hash="about">
                             Про сервіс
                         </Link>
                     </li>
                     <li>
-                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/">
+                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/" hash="how_works">
                             Як працює
                         </Link>
                     </li>
                     <li>
-                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/">
+                        <Link className="transition duration-300 hover:text-[#6B6B6B]" to="/" hash="contacts">
                             Контакти
                         </Link>
                     </li>

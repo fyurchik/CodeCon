@@ -28,7 +28,7 @@ import Logo from "../assets/Logo.svg";
 const Page = () => {
     return (
         <section className="mx-[60px] mt-[60px]">
-            <div>
+            <div id="about">
                 <p className=" text-xl font-medium leading-4 text-[#A0A0A0]">благодійний застосунок</p>
                 <div className="mt-6 flex flex-row items-center justify-between gap-14">
                     <h1 className="max-w-[20ch] text-6xl font-medium leading-[60.16px] text-[#181818]">
@@ -99,7 +99,7 @@ const Page = () => {
                 </div>
                 <img src={handsImg} alt="Risen hands" className="mt-[36px]" />
             </div>
-            <div className="rounded-3xl bg-card p-[90px]">
+            <div className="rounded-3xl bg-card p-[90px]" id="how_works">
                 <h2 className="w-[24ch] text-[64px] font-medium leading-none">
                     Як ним користуватись?
                     <br /> Все дуже просто:
@@ -337,7 +337,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-            <div className="mt-[190px] grid grid-cols-[0.25fr_0.75fr] rounded-3xl bg-card p-[90px]">
+            <div className="mt-[190px] grid grid-cols-[0.25fr_0.75fr] rounded-3xl bg-card p-[90px]" id="contacts">
                 <div className="flex flex-col justify-between gap-[160px]">
                     <div>
                         <img src={Logo} alt="Logo" />
