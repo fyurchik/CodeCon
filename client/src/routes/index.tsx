@@ -254,9 +254,11 @@ const Page = () => {
                                     Проєкт тимчасового модульного житла NEST
                                 </h3>
                             </div>
-                            <Button size="xl" className="mt-auto w-full">
-                                Підтримати
-                            </Button>
+                            <a href="https://prytulafoundation.org/humanitarian-help/direction/nest">
+                                <Button size="xl" className="mt-auto w-full">
+                                    Підтримати
+                                </Button>
+                            </a>
                         </div>
                     </div>
                     <div className="grid grid-cols-[0.9fr_1.1fr] gap-[30px] rounded-3xl bg-card p-[30px]">
@@ -268,9 +270,11 @@ const Page = () => {
                                     Обладнання для швидкого кризового реагування
                                 </h3>
                             </div>
-                            <Button size="xl" className="mt-auto w-full">
-                                Підтримати
-                            </Button>
+                            <a href="https://prytulafoundation.org/humanitarian-help/direction/emergency-response">
+                                <Button size="xl" className="mt-auto w-full">
+                                    Підтримати
+                                </Button>
+                            </a>
                         </div>
                     </div>
                     <div className="grid grid-cols-[0.9fr_1.1fr] gap-[30px] rounded-3xl bg-card p-[30px]">
@@ -282,9 +286,11 @@ const Page = () => {
                                     Грай у Minecraft - відбудовуй у реальному житті
                                 </h3>
                             </div>
-                            <Button size="xl" className="mt-auto w-full">
-                                Підтримати
-                            </Button>
+                            <a href="https://u24.gov.ua/uk/minesalt">
+                                <Button size="xl" className="mt-auto w-full">
+                                    Підтримати
+                                </Button>
+                            </a>
                         </div>
                     </div>
                     <div className="grid grid-cols-[0.9fr_1.1fr] gap-[30px] rounded-3xl bg-card p-[30px]">
@@ -296,9 +302,11 @@ const Page = () => {
                                     Це морський бій. Твій донат — твій хід
                                 </h3>
                             </div>
-                            <Button size="xl" className="mt-auto w-full">
-                                Підтримати
-                            </Button>
+                            <a href="https://u24.gov.ua/uk/seababy">
+                                <Button size="xl" className="mt-auto w-full">
+                                    Підтримати
+                                </Button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -320,21 +328,31 @@ const Page = () => {
                     </p>
                 </div>
                 <div className="mt-[80px] flex -rotate-1 gap-[25px]">
-                    <div className="rounded-3xl bg-card p-[80px]">
-                        <img src={azov} alt="Azov" />
-                    </div>
-                    <div className="rounded-3xl bg-card p-[80px]">
-                        <img src={pz} alt="Povernys Zhyvym" />
-                    </div>
-                    <div className="rounded-3xl bg-card p-[80px]">
-                        <img src={prytula} alt="Fond Prytuly" />
-                    </div>
-                    <div className="rounded-3xl bg-card p-[80px]">
-                        <img src={ted} alt="United24" />
-                    </div>
-                    <div className="rounded-3xl bg-card p-[80px]">
-                        <img src={azov2} alt="Yanholy Azovu" />
-                    </div>
+                    <a href="https://www.azov-one.com/">
+                        <div className="rounded-3xl bg-card p-[80px]">
+                            <img src={azov} alt="Azov" />
+                        </div>
+                    </a>
+                    <a href="https://savelife.in.ua/">
+                        <div className="rounded-3xl bg-card p-[80px]">
+                            <img src={pz} alt="Povernys Zhyvym" />
+                        </div>
+                    </a>
+                    <a href="https://prytulafoundation.org/">
+                        <div className="rounded-3xl bg-card p-[80px]">
+                            <img src={prytula} alt="Fond Prytuly" />
+                        </div>
+                    </a>
+                    <a href="https://u24.gov.ua/uk">
+                        <div className="rounded-3xl bg-card p-[80px]">
+                            <img src={ted} alt="United24" />
+                        </div>
+                    </a>
+                    <a href="https://azovangels.com/en/">
+                        <div className="rounded-3xl bg-card p-[80px]">
+                            <img src={azov2} alt="Yanholy Azovu" />
+                        </div>
+                    </a>
                 </div>
             </div>
             <div className="mt-[190px] grid grid-cols-[0.25fr_0.75fr] rounded-3xl bg-card p-[90px]" id="contacts">
@@ -347,9 +365,7 @@ const Page = () => {
                         <p className="mt-[15px] text-[22px] text-primary">Тexample@gmail.com</p>
                     </div>
                     <div>
-                        <Link to="/" className="text-[22px]">
-                            Політика конфіденційності
-                        </Link>
+                        <p className="text-[22px]">Політика конфіденційності</p>
                         <p className="mt-[40px] text-[22px] text-[#C4C4C4]">
                             Developed by CoDeity
                             <br /> developming team for
