@@ -4,3 +4,4 @@ Hackaton project created by
 3. [Dunkelhaiser](https://github.com/Dunkelhaiser)
 4. [fyurchik](https://github.com/fyurchik)
 5. Dmytro Kundys
+# You could see project preview(videos) in Issues tab.
